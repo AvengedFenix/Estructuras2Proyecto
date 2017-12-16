@@ -1501,11 +1501,8 @@
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-<<<<<<< HEAD
                   <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
-=======
                   <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
->>>>>>> c97a921115cbbb1c28e7c45ae66935ab441a14db
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel12" min="-2" pref="28" max="-2" attributes="0"/>

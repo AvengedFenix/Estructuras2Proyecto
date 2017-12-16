@@ -49,6 +49,18 @@ public class BTree<Key extends Comparable<Key>, Value> {
         root = new Node(0);
     }
 
+    public int numberKeys(Node n) {
+        int num = 0;
+        Llave[] ll = n.children;
+        for (int i = 0; i < M; i++) {
+            if (ll[i] != null) {
+                num++;
+            }
+        }
+
+        return num;
+    }
+
     /**
      * Returns true if this symbol table is empty.
      *
@@ -207,32 +219,56 @@ public class BTree<Key extends Comparable<Key>, Value> {
         Node nod = currentNode;
         nod.m--;
         int index = 0;
-        for (int i = 0; i < nod.children.length; i++) {
-            if (nod.children[i].toString().equals(key.toString())) {
+        for (int i = 0; i < numberKeys(nod); i++) {
+//            System.out.println(i + " " + nod.children[i].key);
+//            System.out.println(key);
+            if (nod.children[i].key.toString().equals(key.toString())) {
                 index = i;
             }
         }
+        System.out.println(index);
         nod.children = remove(index, nod.children);
 
         if (nod.m > M / 2) {
-            return null;
+            //return null;
+            return merge(nod);
         } else {
-            return concat(nod);
+            return merge(nod);
         }
     }
 
-    public Node concat(Node n) {
+    public Node merge(Node n) {
         int count = adjacentNodes.size() - 1;
-        Node b = adjacentNodes.get(count - 1);
-        if (adjacentNodes.get(count - 2).m > adjacentNodes.get(count).m) {
-            Node a = adjacentNodes.get(count - 2);
+        Node b = currentNode;
+        Node a = new Node(0);
+        if (numberKeys(adjacentNodes.get(count - 2))
+                > numberKeys(adjacentNodes.get(count))) {
+            a = adjacentNodes.get(count - 2);
         } else {
-            Node a = adjacentNodes.get(count);
+            a = adjacentNodes.get(count);
         }
+
+        for (int i = 0; i < adjacentNodes.size(); i++) {
+            for (int j = 0; j < numberKeys(adjacentNodes.get(i)); j++) {
+                System.out.println(a.children[j].key);
+            }
+            System.out.println("");
+        }
+        System.out.println("////");
+        for (int i = 0; i < numberKeys(a); i++) {
+            System.out.println(a.children[i].key);
+        }
+        System.out.println("");
+        for (int i = 0; i < numberKeys(b); i++) {
+            System.out.println(a.children[i].key);
+        }
+
         return b;
     }
 
     public Llave[] remove(int index, Llave[] arr) {
+
+        /*
         Llave[] newArr = new Llave[arr.length - 1];
         if (index < 0 || index > arr.length) {
             return arr;
@@ -243,6 +279,15 @@ public class BTree<Key extends Comparable<Key>, Value> {
                 i++;
             }
             newArr[j++] = arr[i];
+        }*/
+        Llave[] newArr = new Llave[M];
+        arr[index] = null;
+        int j = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != null) {
+                newArr[j] = arr[i];
+                j++;
+            }
         }
 
         return newArr;

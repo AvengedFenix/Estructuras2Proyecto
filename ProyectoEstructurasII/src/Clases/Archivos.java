@@ -400,14 +400,11 @@ public class Archivos {
             String fieldname = token2.nextToken();
             boolean key = false;
             if (token2.hasMoreTokens()) {
-                //System.out.println(fieldname);
                 String fieldtype = token2.nextToken().substring(1);
-                //System.out.println(fieldtype);
                 int length = Integer.parseInt(token2.nextToken());
-                //System.out.println(length);
-                System.out.println("antes de aKa");
+                //System.out.println("antes de aKa");
                 if (token2.nextToken().equals("k")) {
-                    System.out.println("entre aKa");
+                    //System.out.println("entre aKa");
                     key = true;
                 }
                 archivo.addCampo(new Campos(fieldname, fieldtype, length, key));

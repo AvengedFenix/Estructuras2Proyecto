@@ -1,4 +1,4 @@
-Cuarto: int[23]:n,                       DVD Room: double[23]:n,                       CD Rooth: char[12]:n,
+Cuarto: int[23]:n,                                          DVD Room: double[23]:n,                                          CD Rooth: char[12]:n, 
 23|34|Twitch
 34|45|Pija
 45|22|Mast

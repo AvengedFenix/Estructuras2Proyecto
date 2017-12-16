@@ -1482,6 +1482,7 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         model = new DefaultTableModel();
         model2 = new DefaultTableModel();
+        model3 = new DefaultTableModel();
         if (archivo != null) {
             jd_fileEDIT.pack();
             jd_fileEDIT.setLocationRelativeTo(null);

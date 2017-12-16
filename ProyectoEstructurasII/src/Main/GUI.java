@@ -128,7 +128,7 @@ public class GUI extends javax.swing.JFrame {
         chb_keyEdit = new javax.swing.JCheckBox();
         jb_addFile2 = new javax.swing.JButton();
         bg_typeEdit = new javax.swing.ButtonGroup();
-        jd_fileopen = new javax.swing.JDialog();
+        jd_fileEDIT = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_info = new javax.swing.JTable();
@@ -137,7 +137,6 @@ public class GUI extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         bt_backtomain = new javax.swing.JButton();
         bt_removereg = new javax.swing.JButton();
-        bt_savereg = new javax.swing.JButton();
         bt_addregistry = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
@@ -154,6 +153,19 @@ public class GUI extends javax.swing.JFrame {
         jButton16 = new javax.swing.JButton();
         bt_backtomain1 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
+        jd_fileadd = new javax.swing.JDialog();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jButton22 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
+        bt_backtomain3 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jt_info2 = new javax.swing.JTable();
+        bt_savereg1 = new javax.swing.JButton();
+        bt_addregistry1 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         mainPanel = new javax.swing.JPanel();
         jb_addFile = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -716,8 +728,6 @@ public class GUI extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jd_fileopen.setUndecorated(true);
-
         jPanel3.setBackground(new java.awt.Color(0, 102, 153));
 
         jt_info.setFont(new java.awt.Font("Gotham Medium", 0, 14)); // NOI18N
@@ -796,18 +806,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        bt_savereg.setBackground(new java.awt.Color(255, 255, 255));
-        bt_savereg.setFont(new java.awt.Font("Gotham Medium", 0, 13)); // NOI18N
-        bt_savereg.setForeground(new java.awt.Color(0, 102, 153));
-        bt_savereg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_check_circle_white_24dp_2x.png"))); // NOI18N
-        bt_savereg.setBorderPainted(false);
-        bt_savereg.setContentAreaFilled(false);
-        bt_savereg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_saveregActionPerformed(evt);
-            }
-        });
-
         bt_addregistry.setBackground(new java.awt.Color(255, 255, 255));
         bt_addregistry.setFont(new java.awt.Font("Gotham Medium", 0, 13)); // NOI18N
         bt_addregistry.setForeground(new java.awt.Color(0, 102, 153));
@@ -861,8 +859,7 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(bt_removereg)
-                    .addComponent(bt_addregistry)
-                    .addComponent(bt_savereg))
+                    .addComponent(bt_addregistry))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -873,31 +870,27 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton12)
-                                .addGap(8, 8, 8))
-                            .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(bt_removereg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bt_addregistry)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bt_savereg)))
+                    .addComponent(bt_removereg)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jButton12)
+                            .addGap(8, 8, 8))
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(bt_addregistry, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(15, 15, 15))
         );
 
-        javax.swing.GroupLayout jd_fileopenLayout = new javax.swing.GroupLayout(jd_fileopen.getContentPane());
-        jd_fileopen.getContentPane().setLayout(jd_fileopenLayout);
-        jd_fileopenLayout.setHorizontalGroup(
-            jd_fileopenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jd_fileEDITLayout = new javax.swing.GroupLayout(jd_fileEDIT.getContentPane());
+        jd_fileEDIT.getContentPane().setLayout(jd_fileEDITLayout);
+        jd_fileEDITLayout.setHorizontalGroup(
+            jd_fileEDITLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jd_fileopenLayout.setVerticalGroup(
-            jd_fileopenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jd_fileEDITLayout.setVerticalGroup(
+            jd_fileEDITLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -1046,6 +1039,153 @@ public class GUI extends javax.swing.JFrame {
             jd_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jPanel12.setBackground(new java.awt.Color(0, 102, 153));
+
+        jPanel13.setBackground(new java.awt.Color(0, 86, 138));
+
+        jButton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_clear_white_24dp_1x.png"))); // NOI18N
+        jButton22.setBorderPainted(false);
+        jButton22.setContentAreaFilled(false);
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
+
+        jButton23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_arrow_drop_down_white_24dp_1x.png"))); // NOI18N
+        jButton23.setBorderPainted(false);
+        jButton23.setContentAreaFilled(false);
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
+
+        bt_backtomain3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_forward_white_24dp_1x.png"))); // NOI18N
+        bt_backtomain3.setBorderPainted(false);
+        bt_backtomain3.setContentAreaFilled(false);
+        bt_backtomain3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_backtomain3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addComponent(bt_backtomain3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton22)
+                .addContainerGap())
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bt_backtomain3)
+        );
+
+        jt_info2.setFont(new java.awt.Font("Gotham Medium", 0, 14)); // NOI18N
+        jt_info2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jt_info2.setGridColor(new java.awt.Color(0, 102, 153));
+        jt_info2.setSelectionBackground(new java.awt.Color(0, 102, 153));
+        jScrollPane3.setViewportView(jt_info2);
+
+        bt_savereg1.setBackground(new java.awt.Color(255, 255, 255));
+        bt_savereg1.setFont(new java.awt.Font("Gotham Medium", 0, 13)); // NOI18N
+        bt_savereg1.setForeground(new java.awt.Color(0, 102, 153));
+        bt_savereg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_check_circle_white_24dp_2x.png"))); // NOI18N
+        bt_savereg1.setBorderPainted(false);
+        bt_savereg1.setContentAreaFilled(false);
+        bt_savereg1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_savereg1ActionPerformed(evt);
+            }
+        });
+
+        bt_addregistry1.setBackground(new java.awt.Color(255, 255, 255));
+        bt_addregistry1.setFont(new java.awt.Font("Gotham Medium", 0, 13)); // NOI18N
+        bt_addregistry1.setForeground(new java.awt.Color(0, 102, 153));
+        bt_addregistry1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_add_circle_white_36dp_1x.png"))); // NOI18N
+        bt_addregistry1.setBorderPainted(false);
+        bt_addregistry1.setContentAreaFilled(false);
+        bt_addregistry1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_addregistry1ActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Gotham Bold", 0, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("A G R E G A R   R E G I S T R O S ");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addComponent(jLabel14)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(0, 63, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(bt_savereg1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_addregistry1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bt_addregistry1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_savereg1)
+                .addGap(25, 25, 25))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addGap(0, 145, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(114, 114, 114))
+        );
+
+        javax.swing.GroupLayout jd_fileaddLayout = new javax.swing.GroupLayout(jd_fileadd.getContentPane());
+        jd_fileadd.getContentPane().setLayout(jd_fileaddLayout);
+        jd_fileaddLayout.setHorizontalGroup(
+            jd_fileaddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jd_fileaddLayout.setVerticalGroup(
+            jd_fileaddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(jList1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(null);
@@ -1343,10 +1483,10 @@ public class GUI extends javax.swing.JFrame {
         model = new DefaultTableModel();
         model2 = new DefaultTableModel();
         if (archivo != null) {
-            jd_fileopen.pack();
-            jd_fileopen.setLocationRelativeTo(null);
+            jd_fileEDIT.pack();
+            jd_fileEDIT.setLocationRelativeTo(null);
             mainPanel.setEnabled(false);
-            jd_fileopen.setVisible(true);
+            jd_fileEDIT.setVisible(true);
             this.setVisible(false);
 
             int keyColumn = 0;
@@ -1494,7 +1634,7 @@ public class GUI extends javax.swing.JFrame {
                 this.setVisible(true);
 
             } else {
-                JOptionPane.showMessageDialog(jd_fileopen, "No key has been selected");
+                JOptionPane.showMessageDialog(jd_fileEDIT, "No key has been selected");
             }
 
         } catch (IOException ex) {
@@ -1554,41 +1694,11 @@ public class GUI extends javax.swing.JFrame {
         model.removeRow(row);
     }//GEN-LAST:event_bt_removeregActionPerformed
 
-    private void bt_saveregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveregActionPerformed
-        // TODO add your handling code here:
-        if (jt_info.getCellEditor() != null) {
-            jt_info.getCellEditor().stopCellEditing();
-        }
-        StringBuilder sb = new StringBuilder();
-        for (int i = lastRow; i < model.getRowCount(); i++) {
-            sb = new StringBuilder();
-            for (int j = 0; j < model.getColumnCount(); j++) {
-                if (j == model.getColumnCount() - 1) {
-                    sb.append((String) model.getValueAt(i, j));
-                } else {
-                    sb.append((String) model.getValueAt(i, j)).append("|");
-                }
-            }
-            archivo.addRegistro(sb.toString());
-
-        }
-        lastRow = model.getRowCount();
-        try {
-            archivo.save();
-
-        } catch (IOException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("arbol imprimiendo");
-        archivo.llenarTree(registrosAvailable);
-    }//GEN-LAST:event_bt_saveregActionPerformed
-
     private void bt_addregistryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_addregistryActionPerformed
         // TODO add your handling code here:
-        if (model.getRowCount() == 0 || model.getValueAt(model.getRowCount() - 1, 0) != null) {
-            Object[] rowData = null;
-            model.addRow(rowData);
-        }
+        jd_fileadd.pack();
+        jd_fileadd.setLocationRelativeTo(null);
+        jd_fileadd.setVisible(true);
     }//GEN-LAST:event_bt_addregistryActionPerformed
 
     private void rb_intActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_intActionPerformed
@@ -1661,7 +1771,7 @@ public class GUI extends javax.swing.JFrame {
         jd_search.pack();
         jd_search.setLocationRelativeTo(null);
         jd_search.setVisible(true);
-       
+
         jt_search.setModel(model2);
     }//GEN-LAST:event_jButton14ActionPerformed
 
@@ -1677,15 +1787,69 @@ public class GUI extends javax.swing.JFrame {
 
     private void bt_backtomain1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_backtomain1ActionPerformed
         // TODO add your handling code here:
-        jd_fileopen.pack();
-        jd_fileopen.setLocationRelativeTo(null);
-        jd_fileopen.setVisible(true);
+        jd_fileEDIT.pack();
+        jd_fileEDIT.setLocationRelativeTo(null);
+        jd_fileEDIT.setVisible(true);
     }//GEN-LAST:event_bt_backtomain1ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         // TODO add your handling code here:
         archivo.eliminar(tf_search.getText());
     }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void bt_backtomain3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_backtomain3ActionPerformed
+        // TODO add your handling code here:
+        jd_fileEDIT.pack();
+        jd_fileEDIT.setLocationRelativeTo(null);
+        jd_fileEDIT.setVisible(true);
+    }//GEN-LAST:event_bt_backtomain3ActionPerformed
+
+    private void bt_savereg1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_savereg1ActionPerformed
+        // TODO add your handling code here:
+        if (jt_info.getCellEditor() != null) {
+            jt_info.getCellEditor().stopCellEditing();
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = lastRow; i < model.getRowCount(); i++) {
+            sb = new StringBuilder();
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                if (j == model.getColumnCount() - 1) {
+                    sb.append((String) model.getValueAt(i, j));
+                } else {
+                    sb.append((String) model.getValueAt(i, j)).append("|");
+                }
+            }
+            archivo.addRegistro(sb.toString());
+
+        }
+        lastRow = model.getRowCount();
+        try {
+            archivo.save();
+
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("arbol imprimiendo");
+        archivo.llenarTree(registrosAvailable);
+    }//GEN-LAST:event_bt_savereg1ActionPerformed
+
+    private void bt_addregistry1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_addregistry1ActionPerformed
+        // TODO add your handling code here:
+        if (model3.getRowCount() == 0 || model3.getValueAt(model3.getRowCount() - 1, 0) != null) {
+            Object[] rowData = null;
+            model3.addRow(rowData);
+        }
+
+    }//GEN-LAST:event_bt_addregistry1ActionPerformed
 
     private void searchKey() {
         String key = tf_search.getText();
@@ -1744,17 +1908,19 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bg_typeEdit;
     private javax.swing.JButton bt_addCampos;
     private javax.swing.JButton bt_addregistry;
+    private javax.swing.JButton bt_addregistry1;
     private javax.swing.JButton bt_backtoAddFile;
     private javax.swing.JButton bt_backtoAddFile1;
     private javax.swing.JButton bt_backtoMain;
     private javax.swing.JButton bt_backtomain;
     private javax.swing.JButton bt_backtomain1;
+    private javax.swing.JButton bt_backtomain3;
     private javax.swing.JButton bt_createFile;
     private javax.swing.JButton bt_edit;
     private javax.swing.JButton bt_fileedit;
     private javax.swing.JButton bt_removeCampos;
     private javax.swing.JButton bt_removereg;
-    private javax.swing.JButton bt_savereg;
+    private javax.swing.JButton bt_savereg1;
     private javax.swing.JComboBox<String> cb_campos;
     private javax.swing.JCheckBox chb_key;
     private javax.swing.JCheckBox chb_keyEdit;
@@ -1768,6 +1934,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1780,6 +1948,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1788,7 +1957,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1799,6 +1971,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton jb_addFile;
     private javax.swing.JButton jb_addFile1;
     private javax.swing.JButton jb_addFile2;
@@ -1806,7 +1980,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JDialog jd_addCampos;
     private javax.swing.JDialog jd_addFile;
     private javax.swing.JDialog jd_editCampos;
-    private javax.swing.JDialog jd_fileopen;
+    private javax.swing.JDialog jd_fileEDIT;
+    private javax.swing.JDialog jd_fileadd;
     private javax.swing.JDialog jd_search;
     private javax.swing.JLabel jl_fileName;
     private javax.swing.JLabel jl_key;
@@ -1814,6 +1989,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jp_addFile;
     private javax.swing.JPanel jp_addFileTopBar;
     private javax.swing.JTable jt_info;
+    private javax.swing.JTable jt_info2;
     private javax.swing.JTable jt_search;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JRadioButton rb_char;
@@ -1836,6 +2012,7 @@ public class GUI extends javax.swing.JFrame {
     ArrayList registrosAvailable = new ArrayList();
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
+    DefaultTableModel model3 = new DefaultTableModel();
     boolean hasKey;
     int lastRow;
 
@@ -1982,7 +2159,7 @@ public class GUI extends javax.swing.JFrame {
         private void createLabel(WritableSheet sheet)
                 throws WriteException {
             // Lets create a times font
-            WritableFont times10pt = new WritableFont(WritableFont.TAHOMA, 12,WritableFont.NO_BOLD,false);
+            WritableFont times10pt = new WritableFont(WritableFont.TAHOMA, 12, WritableFont.NO_BOLD, false);
             // Define the cell format       
             times = new WritableCellFormat(times10pt);
             // Lets automatically wrap the cells
@@ -1999,7 +2176,7 @@ public class GUI extends javax.swing.JFrame {
             cv.setFormat(timesBoldUnderline);
             //cv.setAutosize(true);
             sheet.getSettings().setDefaultColumnWidth(17);
-            sheet.getSettings().setDefaultRowHeight(21*20);
+            sheet.getSettings().setDefaultRowHeight(21 * 20);
             // Write a few headers
             for (int i = 0; i < archivo.getCampos().size(); i++) {
                 addCaption(sheet, i, 0, archivo.getCampos().get(i).getName());

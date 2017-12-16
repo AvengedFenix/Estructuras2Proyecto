@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+	<noKey>
 		<int [23]> 
 			<Cuarto>23</Cuarto>
 			<Cuarto>34</Cuarto>
@@ -107,6 +108,8 @@
 			<Cuarto>Lienzo</Cuarto>
 			<Cuarto>Dibujjo</Cuarto>
 		</int>
+	</noKey>
+	<noKey>
 		<double [23]> 
 			<                       DVD Room>23</                       DVD Room>
 			<                       DVD Room>34</                       DVD Room>
@@ -214,6 +217,8 @@
 			<                       DVD Room>Lienzo</                       DVD Room>
 			<                       DVD Room>Dibujjo</                       DVD Room>
 		</double>
+	</noKey>
+	<noKey>
 		<char [12]> 
 			<                       CD Rooth>23</                       CD Rooth>
 			<                       CD Rooth>34</                       CD Rooth>
@@ -321,3 +326,4 @@
 			<                       CD Rooth>Lienzo</                       CD Rooth>
 			<                       CD Rooth>Dibujjo</                       CD Rooth>
 		</char>
+	</noKey>

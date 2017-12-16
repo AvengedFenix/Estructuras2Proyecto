@@ -1899,9 +1899,9 @@ public class GUI extends javax.swing.JFrame {
             File f = new File(path);
             String saving = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n";
             BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-            if (!campos.isEmpty()) {
-                for (int i = 0; i < campos.size(); i++) {
-                    if (campos.get(i).isKey() == true) {
+            if (!archivo.getCampos().isEmpty()) {
+                for (int i = 0; i < archivo.getCampos().size(); i++) {
+                    if (archivo.getCampos().get(i).isKey() == true) {
                         saving += "\t<Key>\n";
                     }
                     saving += "\t\t<" + campos.get(i).getType() + " [" + campos.get(i).getLength() + "]> \n";
@@ -1916,7 +1916,7 @@ public class GUI extends javax.swing.JFrame {
                         }
                     }
                     saving += "\t\t</" + campos.get(i).getType() + ">\n";
-                    if (campos.get(i).isKey() == true) {
+                    if (archivo.getCampos().get(i).isKey() == true) {
                         saving += "\t</Key>\n";
                     }
                     //saving = "";

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE XML>
+
+	<Key>
+		<int [6]> 
+			<Person ID>Text here</Person ID>
+		</int>
+	</Key>
+	<NoKey>
+		<char [20]> 
+			<Name>Text here</Name>
+		</char>
+	</NoKey>
+	<NoKey>
+		<int [3]> 
+			<Age>Text here</Age>
+		</int>
+	</NoKey>
+	<NoKey>
+		<int [2]> 
+			<City ID>Text here</City ID>
+		</int>
+	</NoKey>

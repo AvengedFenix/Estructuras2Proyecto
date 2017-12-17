@@ -14,15 +14,19 @@ import java.io.BufferedWriter;
 import java.awt.event.KeyEvent;
 
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -1315,7 +1319,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)))
-                .addGap(0, 4, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1462,6 +1466,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+        
         archivo = new Archivos();
         Archivos file = new Archivos();
         String path = load();
@@ -1476,6 +1481,12 @@ public class GUI extends javax.swing.JFrame {
         model = new DefaultTableModel();
         archivo.setName(filename.substring(0, filename.length() - 4));
         jl_openfile.setText(filename.substring(0, filename.length() - 4));
+        
+        try {
+            cargarIndexFile();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void bt_fileeditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_fileeditActionPerformed
@@ -1525,13 +1536,13 @@ public class GUI extends javax.swing.JFrame {
                                     if (j == keyColumn) {
                                         archivo.addLlave(Integer.parseInt(firstTok));
                                     }
-                                    model.setValueAt(firstTok, i - k, j);
+                                    model.setValueAt(firstTok.replaceAll("\\*", ""), i - k, j);
                                 } else {
                                     String tok3 = tok.nextToken();
                                     if (j == keyColumn) {
                                         archivo.addLlave(Integer.parseInt(tok3));
                                     }
-                                    model.setValueAt(tok3, i - k, j);
+                                    model.setValueAt(tok3.replaceAll("\\*", ""), i - k, j);
                                 }
                             }
                         }
@@ -1697,9 +1708,13 @@ public class GUI extends javax.swing.JFrame {
 
     private void bt_addregistryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_addregistryActionPerformed
         // TODO add your handling code here:
+        resetTable();
         jd_fileadd.pack();
         jd_fileadd.setLocationRelativeTo(null);
         jd_fileadd.setVisible(true);
+        
+        
+        
     }//GEN-LAST:event_bt_addregistryActionPerformed
 
     private void rb_intActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_intActionPerformed
@@ -1812,11 +1827,16 @@ public class GUI extends javax.swing.JFrame {
         jd_fileEDIT.pack();
         jd_fileEDIT.setLocationRelativeTo(null);
         jd_fileEDIT.setVisible(true);
+        
+        
     }//GEN-LAST:event_bt_backtomain3ActionPerformed
 
     private void bt_savereg1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_savereg1ActionPerformed
         // TODO add your handling code here:
-        if (jt_info.getCellEditor() != null) {
+        // TODO add your handling code here:
+        File index = new File(filename + ".ind");
+        
+        /*if (jt_info.getCellEditor() != null) {
             jt_info.getCellEditor().stopCellEditing();
         }
         StringBuilder sb = new StringBuilder();
@@ -1838,7 +1858,135 @@ public class GUI extends javax.swing.JFrame {
 
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        if (jt_info2.getCellEditor() != null) {
+            jt_info2.getCellEditor().stopCellEditing();
         }
+
+        /*for (int i = 0; i < model.getRowCount(); i++) {
+            int totalspaces = 0;
+            sb = new StringBuilder();
+            
+            
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                int tamano = archivo.getCampos().get(j).getLength();
+                System.out.println("tamano: " + tamano);
+
+                //totalSpaces = tamano - ((String)model.getValueAt(i,j)).length();
+                totalspaces += tamano - ((String)model.getValueAt(i,j)).length();
+                if (j == model.getColumnCount() - 1) {
+                    //sb.append((String)model.getValueAt(i, j));
+                    //sb.append(totalSpaces == 0 ? (String) model.getValueAt(i, j) : (String) model.getValueAt(i, j) + extraSpaces(totalSpaces));
+                    sb.append(((String) model.getValueAt(i, j)).length() < tamano ? (String) model.getValueAt(i, j) : (String) model.getValueAt(i, j) + extraSpaces(tamano));
+                    //sb.append((String) model.getValueAt(i, j));
+                } else {
+                    //sb.append((String)model.getValueAt(i, j)).append("|");
+                    //sb.append((String) model.getValueAt(i, j)).append("\");
+                    sb.append(totalSpaces == 0 ? (String) model.getValueAt(i, j) + "|" : (String) model.getValueAt(i, j) + extraSpaces(totalSpaces) + "|");
+                    //sb.append(((String) model.getValueAt(i, j)).length() < tamano ? (String) model.getValueAt(i, j) + "|" : (String) model.getValueAt(i, j) + extraSpaces(tamano) + "|");
+                }
+            }
+            
+            //if(archivo.getLlaves())
+            
+            if(!keyExists(Integer.parseInt((String)model.getValueAt(i, keyColumn)))){
+                sb.append(extraSpaces(totalspaces));
+                archivo.addRegistro(sb.toString());
+            }else{
+                System.out.println("ya existe");
+            }
+        }
+        //lastRow = model.getRowCount();
+        try {
+            archivo.save();
+
+        } catch (IOException ex) {
+            System.out.println("error");
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("arbol imprimiendo");
+        
+        /*
+        DefaultTableModel dtm = (DefaultTableModel)jt_info.getModel();
+        for (int i = dtm.getRowCount() - 1; i >= 0; i--) {
+           
+            dtm.removeRow(i);
+        }*/
+        BufferedWriter bfw;
+        try {
+            bfw = new BufferedWriter(new FileWriter(index));
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < model3.getRowCount(); i++) {
+            boolean keyExists = false;
+            sb = new StringBuilder();
+
+            for (int j = 0; j < model3.getColumnCount(); j++) {
+                int tamano = archivo.getCampos().get(j).getLength();
+                System.out.println("tamano: " + tamano);
+                int totalSpaces;
+
+                if (archivo.getCampos().get(j).isKey()) {
+                    keyColumn = j;
+                    if (!keys.contains(Integer.parseInt((String) model3.getValueAt(i, keyColumn)))) {
+                        keys.add(Integer.parseInt((String) model3.getValueAt(i, keyColumn)));
+                        try {
+                            addToIndex((String) model3.getValueAt(i, j), indexOffsets.size()+1);
+                        } catch (IOException ex) {
+                            System.out.println("error addtoindex");
+                            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        keyExists = true;
+                    }
+                }
+                totalSpaces = tamano - ((String) model3.getValueAt(i, j)).length();
+                if (!keyExists) {
+                    //if(Integer.parseInt((String) model.getValueAt(i, j)) == archivo.getCampos().)
+                    if (j == model3.getColumnCount() - 1) {
+                        sb.append(totalSpaces == 0 ? (String) model3.getValueAt(i, j) : (String) model3.getValueAt(i, j) + extraSpaces(totalSpaces));
+                        
+                        
+                        //sb.append(((String) model.getValueAt(i, j)).length() < tamano ? (String) model.getValueAt(i, j) : (String) model.getValueAt(i, j) + extraSpaces(tamano));
+                        //sb.append((String) model.getValueAt(i, j));
+                    } else {
+                        //sb.append((String) model.getValueAt(i, j)).append("\");
+                        sb.append(totalSpaces == 0 ? (String) model3.getValueAt(i, j) + "|" : (String) model3.getValueAt(i, j) + extraSpaces(totalSpaces) + "|");
+                        
+                        //sb.append(((String) model.getValueAt(i, j)).length() < tamano ? (String) model.getValueAt(i, j) + "|" : (String) model.getValueAt(i, j) + extraSpaces(tamano) + "|");
+                    }
+                }
+            }
+            if(keyExists){
+                System.out.println("no se agrego el registro " + i + " porque ya existe la llave");
+            }
+            else{
+                archivo.addRegistro(sb.toString());
+                
+            }
+            
+        }
+        //lastRow = model.getRowCount();
+        try {
+            archivo.save();
+
+        } catch (IOException ex) {
+            System.out.println("error");
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("arbol imprimiendo");
+
+        /*
+        DefaultTableModel dtm = (DefaultTableModel)jt_info.getModel();
+        for (int i = dtm.getRowCount() - 1; i >= 0; i--) {
+           
+            dtm.removeRow(i);
+        }*/
+        //resetTable();
+
+        resetTable();
         System.out.println("arbol imprimiendo");
         archivo.llenarTree(registrosAvailable);
     }//GEN-LAST:event_bt_savereg1ActionPerformed
@@ -2010,12 +2158,15 @@ public class GUI extends javax.swing.JFrame {
     Archivos archivo;
     String filename;
     Campos tempCamp;
+    ArrayList indexOffsets = new ArrayList();
+    ArrayList keys = new ArrayList();
     ArrayList registrosAvailable = new ArrayList();
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
     DefaultTableModel model3 = new DefaultTableModel();
     boolean hasKey;
     int lastRow;
+    int keyColumn;
 
     public void exit() {
         int p = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit");
@@ -2214,6 +2365,97 @@ public class GUI extends javax.swing.JFrame {
             label = new Label(column, row, s, times);
             sheet.addCell(label);
         }
+    }
+    
+    
+    public String extraSpaces(int count) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < count; i++) {
+            sb.append("*");
+        }
+
+        return sb.toString();
+    }
+
+    public void resetTable() {
+        model3 = new DefaultTableModel();
+        for (int i = 0; i < archivo.getCampos().size(); i++) {
+            String str = archivo.getCampos().get(i).getName();
+            model3.addColumn(str);
+        }
+
+        jt_info2.setModel(model3);
+        //jt_info.setModel(model3);
+    }
+
+    public boolean keyExists(int key) {
+        if (archivo.getLlaves().contains(key)) {
+            return false;
+        }
+        return true;
+    }
+    
+    public void addToIndex(String key, int offset) throws IOException{
+        
+        //System.out.println("filename: " + filename);
+        //String avail = "./Archivos/" + name.replaceFirst("[.][^.]+$", "")+ ".avail";
+        
+        File f2 = new File("./Archivos/" + filename.replaceFirst("[.][^.]+$", "") + ".ind");
+        try ( //BufferedWriter bw = new BufferedWriter(new FileWriter(f2));
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f2, true))) {
+            bw.append(key);
+            bw.append(",");
+            bw.append(Integer.toString(offset));
+            bw.append(";");
+            
+            bw.close();
+            
+            cargarIndexFile();
+        }
+        
+    }
+    
+    public void cargarIndexFile() throws FileNotFoundException{
+        //System.out.println("filename: " + filename);
+        keys = new ArrayList();
+        indexOffsets = new ArrayList();
+        /*BufferedReader br = new BufferedReader(new FileReader(filename + ".ind"));
+        File f = new File(filename + ".ind");*/
+        Scanner sc;
+        try {
+            sc = new Scanner(new File("./Archivos/" + filename.replaceFirst("[.][^.]+$", "") + ".ind"));
+        sc.useDelimiter(";");
+        
+        while(sc.hasNext()){
+            StringTokenizer st = new StringTokenizer(sc.next(), ",", false);
+            int key = Integer.parseInt(st.nextToken());
+            System.out.println("key: " + key);
+            int index = Integer.parseInt(st.nextToken());
+            System.out.println("index: " + index);
+            indexOffsets.add(index);
+            keys.add(key);
+        }
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+        
+        
+        
+        /*
+        
+        File f = new File(path);
+        Archivos archivo = new Archivos();
+        BufferedReader reader = new BufferedReader(new FileReader(f));
+        Scanner sc = new Scanner(f);
+        Scanner sc2 = new Scanner(f);
+
+        String header = sc2.nextLine();
+        //HEADER
+        StringTokenizer token = new StringTokenizer(header, ",", false);
+        */
+        
+        
     }
 
 }

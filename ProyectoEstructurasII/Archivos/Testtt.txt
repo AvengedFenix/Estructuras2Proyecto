@@ -1,0 +1,3 @@
+Nombre: char[20]:n, Apellido: char[20]:n, ID: int[8]:k, 
+Andre***************|Velasquez***********|12345678
+IDK*****************|IDK*****************|12423234

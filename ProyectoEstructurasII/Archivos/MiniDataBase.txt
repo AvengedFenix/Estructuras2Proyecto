@@ -1,1 +1,0 @@
-Person ID: int[6]:k, Name: char[20]:n, Age: int[3]:n, City ID: int[2]:n, 

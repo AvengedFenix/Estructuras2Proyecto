@@ -1,13 +1,14 @@
 package Clases;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class BTree<Key extends Comparable<Key>, Value> {
 
     // max children per B-tree node = M-1
     // (must be even and greater than 2)
-    private static final int M = 6;
+    private static final int M = 4;
 
     private Node root;       // root of the B-tree
     private int height;      // height of the B-tree
@@ -105,6 +106,8 @@ public class BTree<Key extends Comparable<Key>, Value> {
         if (key == null) {
             throw new IllegalArgumentException("argument to get() is null");
         }
+        nodeHeight = 0;
+        intNode = false;
         return search(root, key, height);
     }
 
@@ -221,12 +224,61 @@ public class BTree<Key extends Comparable<Key>, Value> {
         return t;
     }
 
+    private Value redistribution(Node x, int ht) {
+        Llave[] children = x.children;
+        currentNode = x;
+        // external node
+        if (ht == 0) {
+            for (int j = 0; j < x.m; j++) {
+                /*if (eq(key, children[j].key)) {
+                    if (children[j].next != null) {
+                        adjacentNodes.add(children[j].next);
+                    }
+                   
+                }*/
+                System.out.println(children[j].key);
+
+            }
+            return (Value) children[x.m].val;
+        } // internal node
+        else {
+            /*
+            for (int j = 0; j < x.m; j++) {
+                if (eq(key, children[j].key) && nodeHeight == 0) {
+                    intNode = true;
+                    internalNode = x;
+                    nodeHeight = ht;
+                    System.out.println(children[j].key);
+                }
+            }*/
+            for (int j = 0; j < x.m; j++) {
+                /*
+                if (j + 1 == x.m || less(key, children[j + 1].key)) {
+                    if (ht == nodeHeight || ht == 1) {
+                        adjacentNodes.clear();
+                        for (int i = 0; i < x.m; i++) {
+                            adjacentNodes.add(x.children[i].next);
+                        }
+
+                    }
+                    
+                    
+                }*/
+                System.out.println(children[j].key);
+            }
+            return redistribution(children[x.m].next, ht - 1);
+
+        }
+        //return null;
+    }
+
     void remover(Key key) {
         if (key == null) {
             throw new IllegalArgumentException("argument key to remove() is null");
         }
         //Node u = insert(root, key, val, height);
-        search(root, key, height);
+        //redistribution(root, height);
+        get(key);
         Node node = eliminate(key);
 
         n--;
@@ -248,7 +300,7 @@ public class BTree<Key extends Comparable<Key>, Value> {
         System.out.println("NODE HEIGHT" + nodeHeight);
     }
 
-    private void replaceInternal(Key key, Llave replacement, ArrayList<Llave> arr) {
+    private Node replaceInternal(Key key, Llave replacement, ArrayList<Llave> arr) {
         Node nod = internalNode;
         int index = 0;
 
@@ -261,29 +313,78 @@ public class BTree<Key extends Comparable<Key>, Value> {
         }
         System.out.println("INDEX" + index);
 
-        nod.children[index].key = replacement.key;
+        if (arr.size() > M / 2 + 1) {
+            nod.children[index].key = replacement.key;
 
-        Node a = new Node(arr.size() / 2);
-        Node b = new Node(arr.size() / 2);
+            Node a = new Node(arr.size() / 2);
+            Node b = new Node(0);
+            if (arr.size() % 2 == 0) {
+                b = new Node(arr.size() / 2);
+            } else {
+                b = new Node((arr.size() / 2) + 1);
+            }
 
-        for (int i = 0; i < a.m; i++) {
-            a.children[i] = t;
-            b.children[i] = t;
+            for (int i = 0; i < a.m; i++) {
+                a.children[i] = t;
+                b.children[i] = t;
+            }
+
+            if (arr.size() % 2 == 0) {
+                for (int i = 0; i < (arr.size() / 2); i++) {
+                    a.children[i] = arr.get(i);
+
+                    b.children[i] = arr.get(i + arr.size() / 2);
+
+                }
+            } else {
+                for (int i = 0; i < (arr.size() / 2) + 1; i++) {
+                    a.children[i] = arr.get(i);
+
+                    b.children[i] = arr.get(i + arr.size() / 2);
+
+                }
+            }
+
+            if (index - 1 < 0) {
+                nod.children[index].next = a;
+                nod.children[index + 1].next = b;
+            } else {
+                nod.children[index - 1].next = a;
+                nod.children[index].next = b;
+            }
+
+        } else {
+            if (nod.m == 1) {
+                System.out.println("YOU FUCKED UP BRO");
+            }
+            nod.children = remove(index, nod.children);
+            nod.m--;
+            Node a = new Node(arr.size());
+
+            for (int i = 0; i < arr.size(); i++) {
+                a.children[i] = arr.get(i);
+            }
+
+            if (index - 1 < 0) {
+                nod.children[index].next = a;
+            } else {
+                nod.children[index - 1].next = a;
+            }
         }
 
-        for (int i = 0; i < arr.size() / 2; i++) {
-            a.children[i] = arr.get(i);
-            b.children[i] = arr.get(i + arr.size() / 2);
+        if (nod.m > M / 2) {
+            return null;
+            //return merge(nod);
+        } else {
+            get((Key) nod.children[0].key);
+            if (nodeHeight == height) {
+                return null;
+            }
+            return merge(nod);
         }
-        nod.children[index - 1].next = a;
-        nod.children[index].next = b;
-        //nod.children[index].key = nod.children[index].next.children[0].key;
-
-        System.out.println("NODE HEIGHT" + nodeHeight);
     }
 
     private Node eliminate(Key key) {
-
         Node nod = currentNode;
         nod.m--;
         int index = 0;
@@ -301,17 +402,21 @@ public class BTree<Key extends Comparable<Key>, Value> {
             System.out.println("interno");
             eliminateInternal(key);
         }
-
         if (nod.m > M / 2) {
-            //return null;
-            return merge(nod);
+            return null;
+            //return merge(nod);
         } else {
-            return merge(nod);
+            if (nodeHeight == height) {
+                return null;
+            }
+            return merge(currentNode);
+
         }
+
     }
 
     public Node merge(Node n) {
-        Node b = currentNode;
+        Node b = n;
         Node a = new Node(0);
         int current = adjacentNodes.indexOf(b);
         boolean bgreater = false;
@@ -321,7 +426,7 @@ public class BTree<Key extends Comparable<Key>, Value> {
             a = adjacentNodes.get(current - 1);
         } else if (current == 0) {
             a = adjacentNodes.get(current + 1);
-        } else if (adjacentNodes.get(current - 1).m > adjacentNodes.get(current + 1).m) {
+        } else if (current > 0 && adjacentNodes.get(current - 1).m > adjacentNodes.get(current + 1).m) {
             a = adjacentNodes.get(current - 1);
         } else {
             a = adjacentNodes.get(current + 1);
@@ -334,7 +439,6 @@ public class BTree<Key extends Comparable<Key>, Value> {
         if (!bgreater) {
             fatherKey = (Key) a.children[0].key;
         }
-
         get(fatherKey);
 
         ArrayList<Llave> keys = new ArrayList();
@@ -347,11 +451,12 @@ public class BTree<Key extends Comparable<Key>, Value> {
             keys.add(b.children[i]);
         }
 
-        
+        keys = sort(keys);
+
         for (int i = 0; i < keys.size(); i++) {
-            System.out.println(keys.get(i).key);
+            System.out.print(keys.get(i).key + "; ");
         }
-        System.out.println(keys.get(keys.size() / 2).key);
+        System.out.println("PROMOTED" + keys.get(keys.size() / 2).key);
 
         replaceInternal(fatherKey, keys.get(keys.size() / 2), keys);
 
@@ -372,6 +477,27 @@ public class BTree<Key extends Comparable<Key>, Value> {
          */
         return b;
 
+    }
+
+    public ArrayList<Llave> sort(ArrayList<Llave> arr) {
+        boolean swapped = true;
+        int j = 0;
+        Llave temp = arr.get(0);
+        while (swapped) {
+            swapped = false;
+            j++;
+
+            for (int i = 0; i < arr.size() - j; i++) {
+                if (/*i + 1 < arr.size() && */less(arr.get(i + 1).key, arr.get(i).key)) {
+                    temp = arr.get(i);
+                    arr.set(i, arr.get(i + 1));
+                    arr.set(i + 1, temp);
+                    swapped = true;
+                }
+            }
+
+        }
+        return arr;
     }
 
     public Llave[] remove(int index, Llave[] arr) {

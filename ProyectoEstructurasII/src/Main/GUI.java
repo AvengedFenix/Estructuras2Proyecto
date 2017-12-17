@@ -170,6 +170,12 @@ public class GUI extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jd_modificar = new javax.swing.JDialog();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        tf_modificar = new javax.swing.JTextField();
+        jButton18 = new javax.swing.JButton();
+        bt_backtomain4 = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         jb_addFile = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -1195,6 +1201,77 @@ public class GUI extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jList1);
 
+        jLabel15.setText("Posicion registro");
+
+        tf_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_modificarActionPerformed(evt);
+            }
+        });
+
+        jButton18.setText("modificar");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+
+        bt_backtomain4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_forward_white_24dp_1x.png"))); // NOI18N
+        bt_backtomain4.setBorderPainted(false);
+        bt_backtomain4.setContentAreaFilled(false);
+        bt_backtomain4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_backtomain4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jLabel15)
+                .addGap(58, 58, 58)
+                .addComponent(tf_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jButton18)
+                .addGap(51, 51, 51))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bt_backtomain4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bt_backtomain4)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(tf_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton18))
+                .addContainerGap(277, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jd_modificarLayout = new javax.swing.GroupLayout(jd_modificar.getContentPane());
+        jd_modificar.getContentPane().setLayout(jd_modificarLayout);
+        jd_modificarLayout.setHorizontalGroup(
+            jd_modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_modificarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jd_modificarLayout.setVerticalGroup(
+            jd_modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_modificarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(null);
         setUndecorated(true);
@@ -1468,6 +1545,21 @@ public class GUI extends javax.swing.JFrame {
         String path = load();
         try {
             file = archivo.read(path);
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            String header = br.readLine();
+            
+            System.out.println("tamano header: " + header.length());
+            file.setHeaderSize(header.length()+1);
+            int tamanoReg = 0;
+            System.out.println("campos size: " + file.getCampos().size());
+            for (int i = 0; i < file.getCampos().size(); i++) {
+                tamanoReg += file.getCampos().get(i).getLength();
+            }
+            
+            tamanoReg += (file.getCampos().size()-1) + 1;//se le agregan la cantidad de delimitadores y el byte del salto de linea
+            System.out.println("tamano registro: " + tamanoReg);
+            file.setTamanoReg(tamanoReg);
+            br.close();
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1641,6 +1733,11 @@ public class GUI extends javax.swing.JFrame {
                 archivo.save();
                 archivo.saveXML();
                 this.setVisible(true);
+                
+                File f = new File("./Archivos/" + archivo.getName() + ".avail");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+                bw.append("");
+                bw.close();
 
             } else {
                 JOptionPane.showMessageDialog(jd_fileEDIT, "No key has been selected");
@@ -1691,8 +1788,11 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_backtomainActionPerformed
 
     private void bt_removeregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_removeregActionPerformed
+        jd_modificar.setLocationRelativeTo(null);
+        jd_modificar.pack();
+        jd_modificar.setVisible(true);
         // TODO add your handling code here:
-        int row = jt_info.getSelectedRow();
+        /*int row = jt_info.getSelectedRow();
         System.out.println("Row: " + row);
         //archivo.getRegistros().remove(row);
         try {
@@ -1700,7 +1800,10 @@ public class GUI extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        model.removeRow(row);
+        model.removeRow(row);*/
+        
+        
+        
     }//GEN-LAST:event_bt_removeregActionPerformed
 
     private void bt_addregistryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_addregistryActionPerformed
@@ -1804,8 +1907,16 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_backtomain1ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
-        archivo.eliminar(tf_search.getText());
+        try {
+            // TODO add your handling code here:
+            //archivo.eliminar(tf_search.getText());
+
+            
+            //elimina el registro en la posicion x del text field
+            archivo.delete(Integer.parseInt(tf_search.getText()));
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
@@ -1958,18 +2069,18 @@ public class GUI extends javax.swing.JFrame {
             } else {
                 archivo.addRegistro(sb.toString());
 
+                try {
+                    archivo.agregarRegistro(sb.toString());
+                } catch (IOException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
 
         }
         //lastRow = model.getRowCount();
-        try {
-            archivo.save();
-
-        } catch (IOException ex) {
-            System.out.println("error");
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("arbol imprimiendo");
+        
+        //System.out.println("arbol imprimiendo");
 
         /*
         DefaultTableModel dtm = (DefaultTableModel)jt_info.getModel();
@@ -1979,7 +2090,7 @@ public class GUI extends javax.swing.JFrame {
         }*/
         //resetTable();
         resetTable();
-        System.out.println("arbol imprimiendo");
+        //System.out.println("arbol imprimiendo");
         archivo.llenarTree(registrosAvailable);
     }//GEN-LAST:event_bt_savereg1ActionPerformed
 
@@ -1991,6 +2102,44 @@ public class GUI extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_bt_addregistry1ActionPerformed
+
+    private void tf_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_modificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_modificarActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < archivo.getCampos().size(); i++) {
+            String s = JOptionPane.showInputDialog("Ingrese " + archivo.getCampos().get(i).getName());
+            if(s.length() < archivo.getCampos().get(i).getLength()){
+                sb.append(s);
+                sb.append(extraSpaces(archivo.getCampos().get(i).getLength() - s.length()));
+            }else if (s.length() > archivo.getCampos().get(i).getLength()){
+                while(s.length() > archivo.getCampos().get(i).getLength()){
+                    s = JOptionPane.showInputDialog("Tamano invalido, ingrese " + archivo.getCampos().get(i).getName());
+                }
+            }else{
+                sb.append(s);
+            }
+            
+            if(i<archivo.getCampos().size()-1){
+                sb.append("|");
+            }
+        }
+        
+        try {
+            archivo.modificar(Integer.parseInt(tf_modificar.getText()), sb.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void bt_backtomain4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_backtomain4ActionPerformed
+        jd_fileEDIT.pack();
+        jd_fileEDIT.setLocationRelativeTo(null);
+        jd_fileEDIT.setVisible(true);
+    }//GEN-LAST:event_bt_backtomain4ActionPerformed
 
     private void searchKey() {
         String key = tf_search.getText();
@@ -2056,6 +2205,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton bt_backtomain;
     private javax.swing.JButton bt_backtomain1;
     private javax.swing.JButton bt_backtomain3;
+    private javax.swing.JButton bt_backtomain4;
     private javax.swing.JButton bt_createFile;
     private javax.swing.JButton bt_edit;
     private javax.swing.JButton bt_fileedit;
@@ -2074,6 +2224,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
@@ -2090,6 +2241,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2100,6 +2252,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
@@ -2123,6 +2276,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JDialog jd_editCampos;
     private javax.swing.JDialog jd_fileEDIT;
     private javax.swing.JDialog jd_fileadd;
+    private javax.swing.JDialog jd_modificar;
     private javax.swing.JDialog jd_search;
     private javax.swing.JLabel jl_fileName;
     private javax.swing.JLabel jl_key;
@@ -2143,6 +2297,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField tf_camposName;
     private javax.swing.JTextField tf_camposNameEdit;
     private javax.swing.JTextField tf_lengthEdit;
+    private javax.swing.JTextField tf_modificar;
     private javax.swing.JTextField tf_name;
     private javax.swing.JTextField tf_search;
     // End of variables declaration//GEN-END:variables

@@ -8,7 +8,7 @@ public class BTree<Key extends Comparable<Key>, Value> {
 
     // max children per B-tree node = M-1
     // (must be even and greater than 2)
-    private static final int M = 6;
+    private static final int M = 4;
 
     private Node root;       // root of the B-tree
     private int height;      // height of the B-tree
@@ -106,6 +106,8 @@ public class BTree<Key extends Comparable<Key>, Value> {
         if (key == null) {
             throw new IllegalArgumentException("argument to get() is null");
         }
+        nodeHeight = 0;
+        intNode = false;
         return search(root, key, height);
     }
 
@@ -276,9 +278,7 @@ public class BTree<Key extends Comparable<Key>, Value> {
         }
         //Node u = insert(root, key, val, height);
         //redistribution(root, height);
-
-        nodeHeight = 0;
-        search(root, key, height);
+        get(key);
         Node node = eliminate(key);
 
         n--;
@@ -354,6 +354,9 @@ public class BTree<Key extends Comparable<Key>, Value> {
             }
 
         } else {
+            if (nod.m == 1) {
+                System.out.println("YOU FUCKED UP BRO");
+            }
             nod.children = remove(index, nod.children);
             nod.m--;
             Node a = new Node(arr.size());
@@ -373,12 +376,12 @@ public class BTree<Key extends Comparable<Key>, Value> {
             return null;
             //return merge(nod);
         } else {
-            nodeHeight = 0;
             get((Key) nod.children[0].key);
+            if (nodeHeight == height) {
+                return null;
+            }
             return merge(nod);
         }
-        //nod.children[index].key = nod.children[index].next.children[0].key;
-        //System.out.println("NODE HEIGHT" + nodeHeight);
     }
 
     private Node eliminate(Key key) {
@@ -399,13 +402,17 @@ public class BTree<Key extends Comparable<Key>, Value> {
             System.out.println("interno");
             eliminateInternal(key);
         }
-
         if (nod.m > M / 2) {
             return null;
             //return merge(nod);
         } else {
+            if (nodeHeight == height) {
+                return null;
+            }
             return merge(currentNode);
+
         }
+
     }
 
     public Node merge(Node n) {
@@ -419,7 +426,7 @@ public class BTree<Key extends Comparable<Key>, Value> {
             a = adjacentNodes.get(current - 1);
         } else if (current == 0) {
             a = adjacentNodes.get(current + 1);
-        } else if (adjacentNodes.get(current - 1).m > adjacentNodes.get(current + 1).m) {
+        } else if (current > 0 && adjacentNodes.get(current - 1).m > adjacentNodes.get(current + 1).m) {
             a = adjacentNodes.get(current - 1);
         } else {
             a = adjacentNodes.get(current + 1);
@@ -432,7 +439,6 @@ public class BTree<Key extends Comparable<Key>, Value> {
         if (!bgreater) {
             fatherKey = (Key) a.children[0].key;
         }
-        nodeHeight = 0;
         get(fatherKey);
 
         ArrayList<Llave> keys = new ArrayList();
@@ -450,7 +456,7 @@ public class BTree<Key extends Comparable<Key>, Value> {
         for (int i = 0; i < keys.size(); i++) {
             System.out.print(keys.get(i).key + "; ");
         }
-        System.out.println(keys.get(keys.size() / 2).key);
+        System.out.println("PROMOTED" + keys.get(keys.size() / 2).key);
 
         replaceInternal(fatherKey, keys.get(keys.size() / 2), keys);
 

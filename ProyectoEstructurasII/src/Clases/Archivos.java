@@ -9,9 +9,11 @@ import Main.GUI;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
@@ -22,6 +24,8 @@ import java.util.logging.Logger;
 public class Archivos {
 
     String name;
+    int headersize;
+    int tamanoReg;
     ArrayList<Campos> campos = new ArrayList();
     ArrayList<String> registros = new ArrayList();
     ArrayList<Integer> llaves = new ArrayList();
@@ -38,6 +42,22 @@ public class Archivos {
 
     public String getName() {
         return name;
+    }
+
+    public int getHeaderSize() {
+        return headersize;
+    }
+
+    public void setHeaderSize(int headersize) {
+        this.headersize = headersize;
+    }
+
+    public int getTamanoReg() {
+        return tamanoReg;
+    }
+
+    public void setTamanoReg(int tamanoReg) {
+        this.tamanoReg = tamanoReg;
     }
 
     public void setName(String name) {
@@ -99,6 +119,7 @@ public class Archivos {
             }
 
         }
+        writer.append("\n");
         try {
             if (!registros.isEmpty()) {
                 writer.append("\n");
@@ -168,10 +189,13 @@ public class Archivos {
      */
     public void agregarRegistro(String registro) throws IOException {//utilizando la avail list
         String path = "./Archivos/" + name;
-        String avail = "./Archivos/" + path.replaceFirst("[.][^.]+$", "") + ".avail";
+        System.out.println("path: " + path);
+        String avail = path + ".avail";
+        System.out.println("avail: " + avail);
         File f2 = new File(avail);
+
         BufferedReader br = new BufferedReader(new FileReader(f2));
-        String pathReg = "./Archivos/" + name;
+        String pathReg = "./Archivos/" + name + ".txt";
 
         File f = new File(pathReg);
         BufferedWriter writer = new BufferedWriter(new FileWriter(f, true));
@@ -179,12 +203,62 @@ public class Archivos {
             if (br.read() == -1) {//si avail list esta vacio, se agrega el registro al final del archivo
 
                 writer.append(registro);
+                writer.append("\n");
+                System.out.println("no hay registros eliminados, agregando al final del archivo");
 
                 writer.flush();
 
-            } else {//revisar el offset y tamano de los registros en el avail list
-                StringTokenizer st = new StringTokenizer(br.readLine(), ";", true);
-                boolean encontroEspacio = false;
+            } else {//revisar el offset de los registros en el avail list
+                int offset = 0;
+
+                ArrayList<Integer> available = new ArrayList();
+                //StringTokenizer st = new StringTokenizer(br.readLine());
+//                offset = Integer.parseInt(st.nextToken());
+                //System.out.println("token eliminada " + offset);
+                /*
+                while (st.hasMoreTokens()) {
+                    int tok = Integer.parseInt(st.nextToken());
+                    System.out.println("token eliminada: " + tok);
+                    available.add(tok);
+                }*/
+
+                Scanner s = new Scanner(br.readLine());
+                s.useDelimiter(",");
+                //arreglar esta parte, no esta leyendo bien los numeros en el array list
+                while(s.hasNext()){
+                    int i = s.nextInt();
+                    System.out.println("offset " + i);
+                    available.add(i);
+                }
+                /*String linea = br.readLine();
+                System.out.println("linea: " + linea);
+                StringTokenizer st = new StringTokenizer(linea, ",", false);
+                while (linea != null) {
+                    while (st.hasMoreTokens()) {
+                        available.add(Integer.parseInt(st.nextToken()));
+                    }
+                }*/
+
+                if (available.size() > 0) {
+                    offset = available.get(0);
+                }
+
+                //crear un nuervo archivo avail y copiar todos los offsets restantes
+                System.out.println("offset: " + offset);
+                modificar(offset, registro);
+                if (available.size() > 0) {
+                    available.remove(0);
+                }
+
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f2));
+                for (int i = 0; i < available.size(); i++) {
+                    bw.append(Integer.toString(available.get(i)));
+                    bw.append(",");
+                }
+
+                bw.close();
+                /*StringTokenizer st = new StringTokenizer(br.readLine(), ";", true);
+                //boolean encontroEspacio = false;
                 int offset = 0;
                 int size;
                 while (st.hasMoreTokens()) {
@@ -196,15 +270,15 @@ public class Archivos {
                         encontroEspacio = true;
                     }
                     st.nextToken();
-                }
+                }*/
 
-                if (encontroEspacio) {
-                    reemplazarEliminado(registro/*String del registro*/, offset/*posicion del registro eliminado en el archivo*/);
+ /*if (encontroEspacio) {
+                    reemplazarEliminado(registro, offset);
                     //reemplazar el registro borrado por el registro que se va a agregar y actualizar avail list
                 } else {//si no encuentra espacio, el registro se agrega al final
                     writer.append(registro);
-                }
-                /*System.out.println(st.nextToken());
+                }*/
+ /*System.out.println(st.nextToken());
                 
                 System.out.println(st.nextToken());
                  */
@@ -328,37 +402,46 @@ public class Archivos {
 
     }
 
-    public void delete(int reg) throws IOException {
-        String path = "./Archivos/" + name;
+    public void modificar(int posicion, String reg) throws FileNotFoundException, IOException {
+        String path = "./Archivos/" + name + ".txt";
+        System.out.println("name: " + name);
         File f = new File(path);
-        BufferedWriter writer = new BufferedWriter(new FileWriter(f));
 
-        if (!campos.isEmpty()) {
-            for (int i = 0; i < campos.size(); i++) {
-                Campos c = campos.get(i);
-                writer.append(c.toString() + ", ");
-            }
+        RandomAccessFile raf = new RandomAccessFile(f, "rw");
 
-        }
-        try {
-            if (!registros.isEmpty()) {
-                writer.append("\n");
-                for (int i = 0; i < registros.size(); i++) {
-                    writer.append(i == reg ? "*" + registros.get(i) + "\n" : registros.get(i) + "\n");
-                }
+        int offset = ((posicion - 1) * tamanoReg) + headersize;
+        System.out.println("headersize: " + headersize);
+        System.out.println("offset: " + offset);
+        raf.seek(offset);
+        raf.writeBytes(reg);
 
-            }
-        } catch (Exception NullException) {
+        raf.close();
+    }
 
-        }
-        writer.close();
+    public void delete(int reg) throws IOException {
+        String path = "./Archivos/" + name + ".txt";
+        System.out.println("name: " + name);
+        File f = new File(path);
+
+        RandomAccessFile raf = new RandomAccessFile(f, "rw");
+
+        System.out.println("eliminando registro: " + reg);
+
+        int offset = ((reg - 1) * tamanoReg) + headersize;
+        System.out.println("headersize: " + headersize);
+        System.out.println("offset: " + offset);
+        raf.seek(offset);
+        raf.writeBytes("@");
+
+        raf.close();
 
         String avail = "./Archivos/" + name.replaceFirst("[.][^.]+$", "") + ".avail";
 
         File f2 = new File(avail);
         BufferedWriter bw = new BufferedWriter(new FileWriter(f2, true));
-
-        bw.append(reg + "," + registros.get(reg).length() + ";");
+        
+        bw.append(Integer.toString(reg - 1));
+        bw.append(",");
 
         bw.flush();
         bw.close();
@@ -407,7 +490,10 @@ public class Archivos {
                     //System.out.println("entre aKa");
                     key = true;
                 }
+                System.out.println(fieldname + ", " + fieldtype + ", " + length + ", " + key);
                 archivo.addCampo(new Campos(fieldname, fieldtype, length, key));
+                this.addCampo(new Campos(fieldname, fieldtype, length, key));
+                System.out.println(campos.size());
             }
         }
         //REGISTROS
@@ -473,9 +559,8 @@ public class Archivos {
 
         return val;
     }
-    
-    public void eliminar(String key)
-    {
+
+    public void eliminar(String key) {
         tree.remover(Integer.parseInt(key));
         System.out.println(tree.toString());
     }

@@ -12,8 +12,6 @@ public class BTree<Key extends Comparable<Key>, Value> {
     private Node root;       // root of the B-tree
     private int height;      // height of the B-tree
     private int n;           // number of key-value pairs in the B-tree
-    private ArrayList<Node> adjacentNodes = new ArrayList();
-    private Node currentNode;
 
     // helper B-tree node data type
     private static final class Node {
@@ -41,6 +39,12 @@ public class BTree<Key extends Comparable<Key>, Value> {
             this.next = next;
         }
     }
+
+    private ArrayList<Node> adjacentNodes = new ArrayList();
+    private Node currentNode;
+    private Node internalNode;
+    private boolean intNode = false;
+    private int nodeHeight = 0;
 
     /**
      * Initializes an empty B-tree.
@@ -106,7 +110,6 @@ public class BTree<Key extends Comparable<Key>, Value> {
 
     private Value search(Node x, Key key, int ht) {
         Llave[] children = x.children;
-        adjacentNodes.add(x);
         currentNode = x;
         // external node
         if (ht == 0) {
@@ -121,8 +124,22 @@ public class BTree<Key extends Comparable<Key>, Value> {
         } // internal node
         else {
             for (int j = 0; j < x.m; j++) {
+                if (eq(key, children[j].key) && nodeHeight == 0) {
+                    intNode = true;
+                    internalNode = x;
+                    nodeHeight = ht;
+                    System.out.println(children[j].key);
+                }
+            }
+            for (int j = 0; j < x.m; j++) {
                 if (j + 1 == x.m || less(key, children[j + 1].key)) {
+                    if (ht == nodeHeight || ht == 1) {
+                        adjacentNodes.clear();
+                        for (int i = 0; i < x.m; i++) {
+                            adjacentNodes.add(x.children[i].next);
+                        }
 
+                    }
                     return search(children[j].next, key, ht - 1);
                 }
             }
@@ -215,7 +232,58 @@ public class BTree<Key extends Comparable<Key>, Value> {
         n--;
     }
 
+    private void eliminateInternal(Key key) {
+        Node nod = internalNode;
+        int index = 0;
+        for (int i = 0; i < nod.m; i++) {
+            if (nod.children[i].key.toString().equals(key.toString())) {
+                index = i;
+            }
+        }
+        System.out.println("INDEX" + index);
+
+        nod.children[index].key = currentNode.children[0].key;
+        //nod.children[index].key = nod.children[index].next.children[0].key;
+
+        System.out.println("NODE HEIGHT" + nodeHeight);
+    }
+
+    private void replaceInternal(Key key, Llave replacement, ArrayList<Llave> arr) {
+        Node nod = internalNode;
+        int index = 0;
+
+        Llave t = new Llave(0, 0, null);
+
+        for (int i = 0; i < nod.m; i++) {
+            if (nod.children[i].key.toString().equals(key.toString())) {
+                index = i;
+            }
+        }
+        System.out.println("INDEX" + index);
+
+        nod.children[index].key = replacement.key;
+
+        Node a = new Node(arr.size() / 2);
+        Node b = new Node(arr.size() / 2);
+
+        for (int i = 0; i < a.m; i++) {
+            a.children[i] = t;
+            b.children[i] = t;
+        }
+
+        for (int i = 0; i < arr.size() / 2; i++) {
+            a.children[i] = arr.get(i);
+            b.children[i] = arr.get(i + arr.size() / 2);
+        }
+        nod.children[index - 1].next = a;
+        nod.children[index].next = b;
+        //nod.children[index].key = nod.children[index].next.children[0].key;
+
+        System.out.println("NODE HEIGHT" + nodeHeight);
+    }
+
     private Node eliminate(Key key) {
+
         Node nod = currentNode;
         nod.m--;
         int index = 0;
@@ -229,6 +297,11 @@ public class BTree<Key extends Comparable<Key>, Value> {
         System.out.println(index);
         nod.children = remove(index, nod.children);
 
+        if (intNode) {
+            System.out.println("interno");
+            eliminateInternal(key);
+        }
+
         if (nod.m > M / 2) {
             //return null;
             return merge(nod);
@@ -238,32 +311,67 @@ public class BTree<Key extends Comparable<Key>, Value> {
     }
 
     public Node merge(Node n) {
-        int count = adjacentNodes.size() - 1;
         Node b = currentNode;
         Node a = new Node(0);
-        if (numberKeys(adjacentNodes.get(count - 2))
-                > numberKeys(adjacentNodes.get(count))) {
-            a = adjacentNodes.get(count - 2);
+        int current = adjacentNodes.indexOf(b);
+        boolean bgreater = false;
+        Key fatherKey = (Key) b.children[0].key;
+
+        if (current == adjacentNodes.size() - 1) {
+            a = adjacentNodes.get(current - 1);
+        } else if (current == 0) {
+            a = adjacentNodes.get(current + 1);
+        } else if (adjacentNodes.get(current - 1).m > adjacentNodes.get(current + 1).m) {
+            a = adjacentNodes.get(current - 1);
         } else {
-            a = adjacentNodes.get(count);
+            a = adjacentNodes.get(current + 1);
         }
 
+        if (!less(b.children[0].key, a.children[0].key)) {
+            bgreater = true;
+        }
+
+        if (!bgreater) {
+            fatherKey = (Key) a.children[0].key;
+        }
+
+        get(fatherKey);
+
+        ArrayList<Llave> keys = new ArrayList();
+
+        for (int i = 0; i < a.m; i++) {
+            keys.add(a.children[i]);
+        }
+
+        for (int i = 0; i < b.m; i++) {
+            keys.add(b.children[i]);
+        }
+
+        
+        for (int i = 0; i < keys.size(); i++) {
+            System.out.println(keys.get(i).key);
+        }
+        System.out.println(keys.get(keys.size() / 2).key);
+
+        replaceInternal(fatherKey, keys.get(keys.size() / 2), keys);
+
+        //System.out.println("SIZE" + adjacentNodes.size());
+        /*
         for (int i = 0; i < adjacentNodes.size(); i++) {
-            for (int j = 0; j < numberKeys(adjacentNodes.get(i)); j++) {
-                System.out.println(a.children[j].key);
+            for (int j = 0; j < adjacentNodes.get(i).m; j++) {
+                //System.out.println(a.children[j].key);
+                System.out.println(adjacentNodes.get(i).children[j].key);
             }
             System.out.println("");
         }
-        System.out.println("////");
-        for (int i = 0; i < numberKeys(a); i++) {
+        System.out.println("HAS MORE");
+        for (int i = 0; i < a.m; i++) {
             System.out.println(a.children[i].key);
         }
         System.out.println("");
-        for (int i = 0; i < numberKeys(b); i++) {
-            System.out.println(a.children[i].key);
-        }
-
+         */
         return b;
+
     }
 
     public Llave[] remove(int index, Llave[] arr) {

@@ -732,6 +732,8 @@ public class GUI extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jd_fileEDIT.setUndecorated(true);
+
         jPanel3.setBackground(new java.awt.Color(0, 102, 153));
 
         jt_info.setFont(new java.awt.Font("Gotham Medium", 0, 14)); // NOI18N
@@ -1044,6 +1046,8 @@ public class GUI extends javax.swing.JFrame {
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jd_fileadd.setUndecorated(true);
+
         jPanel12.setBackground(new java.awt.Color(0, 102, 153));
 
         jPanel13.setBackground(new java.awt.Color(0, 86, 138));
@@ -1291,7 +1295,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel10)
                     .addComponent(jl_openfile))
-                .addContainerGap(251, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addGap(21, 504, Short.MAX_VALUE)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1313,27 +1317,19 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addGap(52, 52, 52)
                 .addComponent(jl_openfile)
-                .addGap(99, 99, 99)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bt_fileedit)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)))
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))
-                    .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jb_addFile, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))))
+                .addGap(121, 121, 121)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_fileedit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_addFile, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1466,7 +1462,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        
+
         archivo = new Archivos();
         Archivos file = new Archivos();
         String path = load();
@@ -1481,7 +1477,7 @@ public class GUI extends javax.swing.JFrame {
         model = new DefaultTableModel();
         archivo.setName(filename.substring(0, filename.length() - 4));
         jl_openfile.setText(filename.substring(0, filename.length() - 4));
-        
+
         try {
             cargarIndexFile();
         } catch (FileNotFoundException ex) {
@@ -1540,7 +1536,7 @@ public class GUI extends javax.swing.JFrame {
                                 } else {
                                     String tok3 = tok.nextToken();
                                     if (j == keyColumn) {
-                                        archivo.addLlave(Integer.parseInt(tok3));
+                                        archivo.addLlave(Integer.parseInt(tok3.replaceAll("\\*", "")));
                                     }
                                     model.setValueAt(tok3.replaceAll("\\*", ""), i - k, j);
                                 }
@@ -1557,6 +1553,7 @@ public class GUI extends javax.swing.JFrame {
             jt_info.setModel(model);
             lastRow = model.getRowCount();
             System.out.println(archivo.getLlaves());
+            archivo.llenarTree(registrosAvailable);
         } else {
             JOptionPane.showMessageDialog(null, "Please open a file");
         }
@@ -1712,9 +1709,7 @@ public class GUI extends javax.swing.JFrame {
         jd_fileadd.pack();
         jd_fileadd.setLocationRelativeTo(null);
         jd_fileadd.setVisible(true);
-        
-        
-        
+
     }//GEN-LAST:event_bt_addregistryActionPerformed
 
     private void rb_intActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_intActionPerformed
@@ -1827,15 +1822,15 @@ public class GUI extends javax.swing.JFrame {
         jd_fileEDIT.pack();
         jd_fileEDIT.setLocationRelativeTo(null);
         jd_fileEDIT.setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_bt_backtomain3ActionPerformed
 
     private void bt_savereg1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_savereg1ActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
         File index = new File(filename + ".ind");
-        
+
         /*if (jt_info.getCellEditor() != null) {
             jt_info.getCellEditor().stopCellEditing();
         }
@@ -1933,7 +1928,7 @@ public class GUI extends javax.swing.JFrame {
                     if (!keys.contains(Integer.parseInt((String) model3.getValueAt(i, keyColumn)))) {
                         keys.add(Integer.parseInt((String) model3.getValueAt(i, keyColumn)));
                         try {
-                            addToIndex((String) model3.getValueAt(i, j), indexOffsets.size()+1);
+                            addToIndex((String) model3.getValueAt(i, j), indexOffsets.size() + 1);
                         } catch (IOException ex) {
                             System.out.println("error addtoindex");
                             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -1947,26 +1942,24 @@ public class GUI extends javax.swing.JFrame {
                     //if(Integer.parseInt((String) model.getValueAt(i, j)) == archivo.getCampos().)
                     if (j == model3.getColumnCount() - 1) {
                         sb.append(totalSpaces == 0 ? (String) model3.getValueAt(i, j) : (String) model3.getValueAt(i, j) + extraSpaces(totalSpaces));
-                        
-                        
+
                         //sb.append(((String) model.getValueAt(i, j)).length() < tamano ? (String) model.getValueAt(i, j) : (String) model.getValueAt(i, j) + extraSpaces(tamano));
                         //sb.append((String) model.getValueAt(i, j));
                     } else {
                         //sb.append((String) model.getValueAt(i, j)).append("\");
                         sb.append(totalSpaces == 0 ? (String) model3.getValueAt(i, j) + "|" : (String) model3.getValueAt(i, j) + extraSpaces(totalSpaces) + "|");
-                        
+
                         //sb.append(((String) model.getValueAt(i, j)).length() < tamano ? (String) model.getValueAt(i, j) + "|" : (String) model.getValueAt(i, j) + extraSpaces(tamano) + "|");
                     }
                 }
             }
-            if(keyExists){
+            if (keyExists) {
                 System.out.println("no se agrego el registro " + i + " porque ya existe la llave");
-            }
-            else{
+            } else {
                 archivo.addRegistro(sb.toString());
-                
+
             }
-            
+
         }
         //lastRow = model.getRowCount();
         try {
@@ -1985,7 +1978,6 @@ public class GUI extends javax.swing.JFrame {
             dtm.removeRow(i);
         }*/
         //resetTable();
-
         resetTable();
         System.out.println("arbol imprimiendo");
         archivo.llenarTree(registrosAvailable);
@@ -2011,7 +2003,7 @@ public class GUI extends javax.swing.JFrame {
         model2.addRow(rowData);
         for (int j = 0; j < model2.getColumnCount(); j++) {
             if (tok.hasMoreTokens()) {
-                model2.setValueAt(tok.nextToken(), 0, j);
+                model2.setValueAt(tok.nextToken().replaceAll("\\*", ""), 0, j);
             }
         }
         jt_search.setModel(model2);
@@ -2366,8 +2358,7 @@ public class GUI extends javax.swing.JFrame {
             sheet.addCell(label);
         }
     }
-    
-    
+
     public String extraSpaces(int count) {
         StringBuilder sb = new StringBuilder();
 
@@ -2395,12 +2386,11 @@ public class GUI extends javax.swing.JFrame {
         }
         return true;
     }
-    
-    public void addToIndex(String key, int offset) throws IOException{
-        
+
+    public void addToIndex(String key, int offset) throws IOException {
+
         //System.out.println("filename: " + filename);
         //String avail = "./Archivos/" + name.replaceFirst("[.][^.]+$", "")+ ".avail";
-        
         File f2 = new File("./Archivos/" + filename.replaceFirst("[.][^.]+$", "") + ".ind");
         try ( //BufferedWriter bw = new BufferedWriter(new FileWriter(f2));
                 BufferedWriter bw = new BufferedWriter(new FileWriter(f2, true))) {
@@ -2408,15 +2398,15 @@ public class GUI extends javax.swing.JFrame {
             bw.append(",");
             bw.append(Integer.toString(offset));
             bw.append(";");
-            
+
             bw.close();
-            
+
             cargarIndexFile();
         }
-        
+
     }
-    
-    public void cargarIndexFile() throws FileNotFoundException{
+
+    public void cargarIndexFile() throws FileNotFoundException {
         //System.out.println("filename: " + filename);
         keys = new ArrayList();
         indexOffsets = new ArrayList();
@@ -2425,23 +2415,21 @@ public class GUI extends javax.swing.JFrame {
         Scanner sc;
         try {
             sc = new Scanner(new File("./Archivos/" + filename.replaceFirst("[.][^.]+$", "") + ".ind"));
-        sc.useDelimiter(";");
-        
-        while(sc.hasNext()){
-            StringTokenizer st = new StringTokenizer(sc.next(), ",", false);
-            int key = Integer.parseInt(st.nextToken());
-            System.out.println("key: " + key);
-            int index = Integer.parseInt(st.nextToken());
-            System.out.println("index: " + index);
-            indexOffsets.add(index);
-            keys.add(key);
-        }
+            sc.useDelimiter(";");
+
+            while (sc.hasNext()) {
+                StringTokenizer st = new StringTokenizer(sc.next(), ",", false);
+                int key = Integer.parseInt(st.nextToken());
+                System.out.println("key: " + key);
+                int index = Integer.parseInt(st.nextToken());
+                System.out.println("index: " + index);
+                indexOffsets.add(index);
+                keys.add(key);
+            }
         } catch (Exception e) {
             System.out.println("error");
         }
-        
-        
-        
+
         /*
         
         File f = new File(path);
@@ -2453,9 +2441,7 @@ public class GUI extends javax.swing.JFrame {
         String header = sc2.nextLine();
         //HEADER
         StringTokenizer token = new StringTokenizer(header, ",", false);
-        */
-        
-        
+         */
     }
 
 }

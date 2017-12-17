@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE XML>
+
+	<NoKey>
+		<char [12]> 
+			<CD Room>Text here</CD Room>
+		</char>
+	</NoKey>
+	<NoKey>
+		<char [12]> 
+			<Rooth>Text here</Rooth>
+		</char>
+	</NoKey>
+	<Key>
+		<int [4]> 
+			<CD Rooth>Text here</CD Rooth>
+		</int>
+	</Key>

@@ -189,99 +189,55 @@ public class Archivos {
      */
     public void agregarRegistro(String registro) throws IOException {//utilizando la avail list
         String path = "./Archivos/" + name;
-        System.out.println("path: " + path);
+        // System.out.println("path: " + path);
         String avail = path + ".avail";
-        System.out.println("avail: " + avail);
-        File f2 = new File(avail);
+        //System.out.println("avail: " + avail);
+        File favail = new File(avail);
 
-        BufferedReader br = new BufferedReader(new FileReader(f2));
+        BufferedReader br = new BufferedReader(new FileReader(favail));
         String pathReg = "./Archivos/" + name + ".txt";
 
         File f = new File(pathReg);
         BufferedWriter writer = new BufferedWriter(new FileWriter(f, true));
         try {
-            if (br.read() == -1) {//si avail list esta vacio, se agrega el registro al final del archivo
+            int posicion;
+            ArrayList<Integer> available = new ArrayList();
+            Scanner scanner = new Scanner(br.readLine());
+            scanner.useDelimiter(",");
 
+            scanner.useDelimiter(",");
+            String s2;
+            while (scanner.hasNext()) {
+                System.out.println("entro while");
+                s2 = scanner.next();
+                int i = Integer.parseInt(s2);
+                System.out.println("offset: " + i);
+                //posicion = i;
+                available.add(i);
+            }
+
+            posicion = available.get(available.size()-1);
+
+            if (posicion == -1) {//significa que no hay archivos borrados
+                System.out.println("appending al final del archivo");
                 writer.append(registro);
                 writer.append("\n");
-                System.out.println("no hay registros eliminados, agregando al final del archivo");
-
                 writer.flush();
+            } else {
+                modificar(posicion, registro);
+                available.remove(available.size()-1);
 
-            } else {//revisar el offset de los registros en el avail list
-                int offset = 0;
-
-                ArrayList<Integer> available = new ArrayList();
-                //StringTokenizer st = new StringTokenizer(br.readLine());
-//                offset = Integer.parseInt(st.nextToken());
-                //System.out.println("token eliminada " + offset);
-                /*
-                while (st.hasMoreTokens()) {
-                    int tok = Integer.parseInt(st.nextToken());
-                    System.out.println("token eliminada: " + tok);
-                    available.add(tok);
-                }*/
-
-                Scanner s = new Scanner(br.readLine());
-                s.useDelimiter(",");
-                //arreglar esta parte, no esta leyendo bien los numeros en el array list
-                while(s.hasNext()){
-                    int i = s.nextInt();
-                    System.out.println("offset " + i);
-                    available.add(i);
-                }
-                /*String linea = br.readLine();
-                System.out.println("linea: " + linea);
-                StringTokenizer st = new StringTokenizer(linea, ",", false);
-                while (linea != null) {
-                    while (st.hasMoreTokens()) {
-                        available.add(Integer.parseInt(st.nextToken()));
-                    }
-                }*/
-
-                if (available.size() > 0) {
-                    offset = available.get(0);
-                }
-
-                //crear un nuervo archivo avail y copiar todos los offsets restantes
-                System.out.println("offset: " + offset);
-                modificar(offset, registro);
-                if (available.size() > 0) {
-                    available.remove(0);
-                }
-
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f2));
+                BufferedWriter bw = new BufferedWriter(new FileWriter(favail));
                 for (int i = 0; i < available.size(); i++) {
                     bw.append(Integer.toString(available.get(i)));
                     bw.append(",");
                 }
 
+                if (available.isEmpty()) {
+                    bw.write("");
+                }
+
                 bw.close();
-                /*StringTokenizer st = new StringTokenizer(br.readLine(), ";", true);
-                //boolean encontroEspacio = false;
-                int offset = 0;
-                int size;
-                while (st.hasMoreTokens()) {
-                    StringTokenizer st2 = new StringTokenizer(st.nextToken(), ",", true);
-                    offset = Integer.parseInt(st2.nextToken());
-                    size = Integer.parseInt(st2.nextToken());
-
-                    if (size >= registro.length()) {
-                        encontroEspacio = true;
-                    }
-                    st.nextToken();
-                }*/
-
- /*if (encontroEspacio) {
-                    reemplazarEliminado(registro, offset);
-                    //reemplazar el registro borrado por el registro que se va a agregar y actualizar avail list
-                } else {//si no encuentra espacio, el registro se agrega al final
-                    writer.append(registro);
-                }*/
- /*System.out.println(st.nextToken());
-                
-                System.out.println(st.nextToken());
-                 */
             }
 
         } catch (IOException ex) {
@@ -404,7 +360,7 @@ public class Archivos {
 
     public void modificar(int posicion, String reg) throws FileNotFoundException, IOException {
         String path = "./Archivos/" + name + ".txt";
-        System.out.println("name: " + name);
+        //System.out.println("name: " + name);
         File f = new File(path);
 
         RandomAccessFile raf = new RandomAccessFile(f, "rw");
@@ -439,8 +395,8 @@ public class Archivos {
 
         File f2 = new File(avail);
         BufferedWriter bw = new BufferedWriter(new FileWriter(f2, true));
-        
-        bw.append(Integer.toString(reg - 1));
+
+        bw.append(Integer.toString(reg));
         bw.append(",");
 
         bw.flush();

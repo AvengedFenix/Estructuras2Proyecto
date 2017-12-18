@@ -105,7 +105,7 @@ public class Archivos {
     }
 
     public void setTree(BTree tree) {
-        this.tree = tree;
+        this.tree = new BTree();
     }
 
     public void save() throws IOException {
@@ -216,7 +216,7 @@ public class Archivos {
                 available.add(i);
             }
 
-            posicion = available.get(available.size()-1);
+            posicion = available.get(available.size() - 1);
 
             if (posicion == -1) {//significa que no hay archivos borrados
                 System.out.println("appending al final del archivo");
@@ -225,7 +225,7 @@ public class Archivos {
                 writer.flush();
             } else {
                 modificar(posicion, registro);
-                available.remove(available.size()-1);
+                available.remove(available.size() - 1);
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(favail));
                 for (int i = 0; i < available.size(); i++) {
@@ -401,6 +401,7 @@ public class Archivos {
 
         bw.flush();
         bw.close();
+        
 
     }
 
@@ -502,11 +503,11 @@ public class Archivos {
         writer.close();
     }
 
-    public void llenarTree(ArrayList disponibles) {
+    public void printTree(ArrayList disponibles) {
         tree = new BTree();
         for (int i = 0; i < this.llaves.size(); i++) {
             tree.put(llaves.get(i), disponibles.get(i));
-            
+
         }
         System.out.println(tree.toString());
     }
@@ -517,8 +518,14 @@ public class Archivos {
         return val;
     }
 
-    public void eliminar(String key) {
-        tree.remover(Integer.parseInt(key));
+    public void eliminar(String key, ArrayList disponibles) {
+        //tree.remover(Integer.parseInt(key));
+        printTree(disponibles);
+        //System.out.println(tree.toString());
+    }
+
+    public void insertar(String key, String val) {
+        tree.put(Integer.parseInt(key), val);
         System.out.println(tree.toString());
     }
 

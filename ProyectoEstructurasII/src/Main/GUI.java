@@ -9,6 +9,8 @@ import Clases.XMLClass;
 import Clases.Archivos;
 import Clases.Campos;
 
+
+
 import java.io.BufferedWriter;
 
 import java.awt.event.KeyEvent;
@@ -1645,13 +1647,22 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void bt_fileeditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_fileeditActionPerformed
-        /*try {
+
+        /*CrearArchivo ca = new CrearArchivo();
+        try {
+            ca.crearArchivos(archivo);
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        
+        
+        try {
             // TODO add your handling code here:
             listarRegistros();
         } catch (IOException ex) {
             System.out.println("no hay registros disponibles para listar");
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
 
         model = new DefaultTableModel();
         model2 = new DefaultTableModel();
@@ -1697,7 +1708,7 @@ public class GUI extends javax.swing.JFrame {
                             if (tok.hasMoreTokens()) {
                                 if (j == 0) {
                                     if (j == keyColumn) {
-                                        archivo.addLlave(Integer.parseInt(firstTok));
+                                        archivo.addLlave(Integer.parseInt(firstTok.replaceAll("\\*", "")));
                                     }
                                     model.setValueAt(firstTok.replaceAll("\\*", ""), i - k, j);
                                 } else {
@@ -1720,7 +1731,7 @@ public class GUI extends javax.swing.JFrame {
             jt_info.setModel(model);
             lastRow = model.getRowCount();
             System.out.println(archivo.getLlaves());
-            archivo.llenarTree(registrosAvailable);
+           // archivo.llenarTree(registrosAvailable);
         } else {
             JOptionPane.showMessageDialog(null, "Please open a file");
         }
@@ -2234,7 +2245,8 @@ public class GUI extends javax.swing.JFrame {
 
     private void jb_listarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_listarActionPerformed
         try {
-            listarRegistros();
+            //listarRegistros();
+            listar2();
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2654,11 +2666,9 @@ public class GUI extends javax.swing.JFrame {
 
         //System.out.println("filename: " + filename);
         //String avail = "./Archivos/" + name.replaceFirst("[.][^.]+$", "")+ ".avail";
-
         File f2 = new File("./Archivos/" + archivo.getName() + ".ind");
 
         //File f2 = new File("./Archivos/" + filename.replaceFirst("[.][^.]+$", "") + ".ind");
-
         try ( //BufferedWriter bw = new BufferedWriter(new FileWriter(f2));
                 BufferedWriter bw = new BufferedWriter(new FileWriter(f2, true))) {
             bw.append(key);
@@ -2707,8 +2717,62 @@ public class GUI extends javax.swing.JFrame {
 
         String header = sc2.nextLine();
         //HEADER
-        StringTokenizer token = new StringTokenizer(header, ",", false);
+        //StringTokenizer token = new StringTokenizer(header, ",", false);
          */
+    }
+
+    public void listar2() throws FileNotFoundException {
+        DefaultListModel listmodel = new DefaultListModel();
+        //JList list = new JList((ListModel) model);
+
+        //File f2 = new File("./Archivos/" + archivo.getName() + ".ind");
+        try {
+            RandomAccessFile raf = new RandomAccessFile("./Archivos/" + archivo.getName() + ".txt", "rw");
+
+            int cantidadReg = (int) (raf.length() - archivo.getHeaderSize()) / archivo.getTamanoReg();
+
+            for (int posicion = 1; posicion <= cantidadReg; posicion++) {
+                int offset = archivo.getHeaderSize() + ((posicion - 1) * archivo.getTamanoReg());
+                raf.seek(offset);
+                StringBuilder sb = new StringBuilder();
+                sb.append(posicion).append(" ");
+
+                String line = raf.readLine();
+                System.out.println("readline: " + line);
+                if (line != null && line.length()>0 && (line.charAt(0)) != '@') {
+                    //Object[] rowData = null;
+                    // model.addRow(rowData);
+                    //System.out.println("entro if");
+                    String[] campos = line.split("\\|");
+                    System.out.println("campos length " + campos.length);
+                    for (int j = 0; j < campos.length; j++) {
+                        sb.append(archivo.getCampos().get(j).getName()).append(": ");
+                        sb.append(campos[j].replaceAll("\\*", ""));
+                        if (j < campos.length - 1) {
+                            sb.append(" | ");
+                        }
+                        if (archivo.getCampos().get(j).isKey()) {
+                            keyColumn = j;
+                        }
+                        //model.setValueAt(campos[j].replaceAll("\\*", ""), count-k, j);
+
+                    }
+                    //System.out.println("registro: " + line);
+                    listmodel.addElement(sb.toString());
+                } else {
+                    System.out.println("registro eliminado");
+                    //k++;
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+
+        jl_registros2.setModel(listmodel);
+
     }
 
     public void listarRegistros() throws FileNotFoundException, IOException {
@@ -2761,7 +2825,7 @@ public class GUI extends javax.swing.JFrame {
                     listmodel.addElement(sb.toString());
                 } else {
                     System.out.println("registro eliminado");
-                    k++;
+                    //k++;
                 }
                 count++;
             }

@@ -506,8 +506,9 @@ public class Archivos {
         tree = new BTree();
         for (int i = 0; i < this.llaves.size(); i++) {
             tree.put(llaves.get(i), disponibles.get(i));
-            System.out.println(tree.toString());
+            
         }
+        System.out.println(tree.toString());
     }
 
     public String buscarTree(String key) {

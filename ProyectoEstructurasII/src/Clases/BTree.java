@@ -1,14 +1,13 @@
 package Clases;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class BTree<Key extends Comparable<Key>, Value> {
 
     // max children per B-tree node = M-1
     // (must be even and greater than 2)
-    private static final int M = 4;
+    private static final int M = 6;
 
     private Node root;       // root of the B-tree
     private int height;      // height of the B-tree
@@ -121,6 +120,23 @@ public class BTree<Key extends Comparable<Key>, Value> {
                     if (children[j].next != null) {
                         adjacentNodes.add(children[j].next);
                     }
+                    System.out.println("FOUND KEY " + children[j].key);
+                    System.out.println("IN NODE: ");
+                    for (int i = 0; i < currentNode.m; i++) {
+                        System.out.print(children[i].key + "; ");
+                    }
+                    System.out.println("\nIN HEIGHT " + nodeHeight);
+                    System.out.println("IS IT INTERNAL? " + intNode);
+                    System.out.println("THESE ARE ADJACENT ");
+                    for (int i = 0; i < adjacentNodes.size(); i++) {
+                        System.out.println(i + ")");
+                        for (int k = 0; k < adjacentNodes.get(i).m; k++) {
+                            System.out.print(adjacentNodes.get(i).children[k].key + "; ");
+                        }
+                        System.out.println("");
+                    }
+                    System.out.println("LOCATED AT " + adjacentNodes.indexOf(currentNode));
+                    System.out.println("");
                     return (Value) children[j].val;
                 }
             }
@@ -292,7 +308,7 @@ public class BTree<Key extends Comparable<Key>, Value> {
                 index = i;
             }
         }
-        System.out.println("INDEX" + index);
+        System.out.println("INDEX " + index);
 
         nod.children[index].key = currentNode.children[0].key;
         //nod.children[index].key = nod.children[index].next.children[0].key;
@@ -311,9 +327,9 @@ public class BTree<Key extends Comparable<Key>, Value> {
                 index = i;
             }
         }
-        System.out.println("INDEX" + index);
+        System.out.println("INDEX " + index);
 
-        if (arr.size() > M / 2 + 1) {
+        if (arr.size() > (M / 2)) {
             nod.children[index].key = replacement.key;
 
             Node a = new Node(arr.size() / 2);
@@ -356,11 +372,19 @@ public class BTree<Key extends Comparable<Key>, Value> {
         } else {
             if (nod.m == 1) {
                 System.out.println("YOU FUCKED UP BRO");
+
+            } else {
+                System.out.println("YOU HERE BRUH");
             }
             nod.children = remove(index, nod.children);
             nod.m--;
+            
+            System.out.println("NEW NODE: ");
+            for (int i = 0; i < nod.m; i++) {
+                System.out.println(nod.children[i].key + ", ");
+            }
+            
             Node a = new Node(arr.size());
-
             for (int i = 0; i < arr.size(); i++) {
                 a.children[i] = arr.get(i);
             }
@@ -372,11 +396,12 @@ public class BTree<Key extends Comparable<Key>, Value> {
             }
         }
 
-        if (nod.m > M / 2) {
+        if (nod.m >= M / 2) {
             return null;
             //return merge(nod);
         } else {
-            get((Key) nod.children[0].key);
+            System.out.println("ABOUT TO MERGE AFTER REPLACING");
+            //get((Key) nod.children[0].key);
             if (nodeHeight == height) {
                 return null;
             }
@@ -436,9 +461,10 @@ public class BTree<Key extends Comparable<Key>, Value> {
             bgreater = true;
         }
 
-        if (!bgreater) {
+        if (!bgreater) {    
             fatherKey = (Key) a.children[0].key;
-        }
+        } 
+        
         get(fatherKey);
 
         ArrayList<Llave> keys = new ArrayList();
@@ -452,11 +478,13 @@ public class BTree<Key extends Comparable<Key>, Value> {
         }
 
         keys = sort(keys);
+        //fatherKey = (Key) keys.get(keys.size()/2).key;
+        //get(fatherKey);
 
         for (int i = 0; i < keys.size(); i++) {
             System.out.print(keys.get(i).key + "; ");
         }
-        System.out.println("PROMOTED" + keys.get(keys.size() / 2).key);
+        System.out.println("PROMOTED: " + keys.get(keys.size() / 2).key);
 
         replaceInternal(fatherKey, keys.get(keys.size() / 2), keys);
 
@@ -615,27 +643,3 @@ public class BTree<Key extends Comparable<Key>, Value> {
     }
 
 }
-
-/**
- * ****************************************************************************
- * Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
- *
- * This file is part of algs4.jar, which accompanies the textbook
- *
- * Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley
- * Professional, 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
- *
- *
- * algs4.jar is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * algs4.jar. If not, see http://www.gnu.org/licenses.
- * ****************************************************************************
- */

@@ -150,6 +150,7 @@ public class GUI extends javax.swing.JFrame {
         jb_listar = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         jt_info = new javax.swing.JTable();
+        jButton19 = new javax.swing.JButton();
         jd_search = new javax.swing.JDialog();
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -185,6 +186,12 @@ public class GUI extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jl_registros2 = new javax.swing.JList<>();
+        jd_merge = new javax.swing.JDialog();
+        jPanel14 = new javax.swing.JPanel();
+        cb_file1 = new javax.swing.JComboBox<>();
+        cb_file2 = new javax.swing.JComboBox<>();
+        jButton20 = new javax.swing.JButton();
+        jButton21 = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         jb_addFile = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -871,6 +878,13 @@ public class GUI extends javax.swing.JFrame {
         jt_info.setSelectionBackground(new java.awt.Color(0, 102, 153));
         jScrollPane6.setViewportView(jt_info);
 
+        jButton19.setText("jButton19");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -896,7 +910,8 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton14)
-                        .addGap(246, 246, 246)))
+                        .addGap(167, 167, 167)
+                        .addComponent(jButton19)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -919,7 +934,9 @@ public class GUI extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)))
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton19)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton12)))
@@ -1337,6 +1354,62 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        jButton20.setText("Merge");
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
+
+        jButton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_folder_white_36dp_2x.png"))); // NOI18N
+        jButton21.setBorderPainted(false);
+        jButton21.setContentAreaFilled(false);
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButton21)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(cb_file1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton20)
+                        .addGap(37, 37, 37)
+                        .addComponent(cb_file2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_file2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_file1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+        );
+
+        javax.swing.GroupLayout jd_mergeLayout = new javax.swing.GroupLayout(jd_merge.getContentPane());
+        jd_merge.getContentPane().setLayout(jd_mergeLayout);
+        jd_mergeLayout.setHorizontalGroup(
+            jd_mergeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jd_mergeLayout.setVerticalGroup(
+            jd_mergeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -2243,6 +2316,50 @@ public class GUI extends javax.swing.JFrame {
         jd_listar.setVisible(true);
     }//GEN-LAST:event_jb_listarActionPerformed
 
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        // TODO add your handling code here:
+        jd_merge.pack();
+        jd_merge.setLocationRelativeTo(null);
+        jd_merge.setVisible(true);
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        // TODO add your handling code here:
+        archivo2 = new Archivos();
+        Archivos file = new Archivos();
+        String path = load();
+        try {
+            file = archivo2.read(path);
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            String header = br.readLine();
+
+            System.out.println("tamano header: " + header.length());
+            file.setHeaderSize(header.length() + 1);
+            int tamanoReg = 0;
+            System.out.println("campos size: " + file.getCampos().size());
+            for (int i = 0; i < file.getCampos().size(); i++) {
+                tamanoReg += file.getCampos().get(i).getLength();
+            }
+
+            tamanoReg += (file.getCampos().size() - 1) + 1;//se le agregan la cantidad de delimitadores y el byte del salto de linea
+            System.out.println("tamano registro: " + tamanoReg);
+            file.setTamanoReg(tamanoReg);
+            br.close();
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        filename2 = file.getName();
+        archivo2 = file;
+
+        for (int i = 0; i < archivo2.getCampos().size(); i++) {
+            cb_file2.addItem(archivo2.getCampos().get(i).getName());
+        }
+    }//GEN-LAST:event_jButton21ActionPerformed
+
     private void searchKey() {
         String key = tf_search.getText();
         String value = archivo.buscarTree(key);
@@ -2315,6 +2432,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton bt_removereg;
     private javax.swing.JButton bt_savereg1;
     private javax.swing.JComboBox<String> cb_campos;
+    private javax.swing.JComboBox<String> cb_file1;
+    private javax.swing.JComboBox<String> cb_file2;
     private javax.swing.JCheckBox chb_key;
     private javax.swing.JCheckBox chb_keyEdit;
     private javax.swing.JButton jButton1;
@@ -2327,7 +2446,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton3;
@@ -2358,6 +2480,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2382,6 +2505,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JDialog jd_fileEDIT;
     private javax.swing.JDialog jd_fileadd;
     private javax.swing.JDialog jd_listar;
+    private javax.swing.JDialog jd_merge;
     private javax.swing.JDialog jd_modificar;
     private javax.swing.JDialog jd_search;
     private javax.swing.JLabel jl_fileName;
@@ -2410,7 +2534,9 @@ public class GUI extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     Archivos archivo;
+    Archivos archivo2;
     String filename;
+    String filename2;
     Campos tempCamp;
     ArrayList indexOffsets = new ArrayList();
     ArrayList keys = new ArrayList();
@@ -2654,11 +2780,9 @@ public class GUI extends javax.swing.JFrame {
 
         //System.out.println("filename: " + filename);
         //String avail = "./Archivos/" + name.replaceFirst("[.][^.]+$", "")+ ".avail";
-
         File f2 = new File("./Archivos/" + archivo.getName() + ".ind");
 
         //File f2 = new File("./Archivos/" + filename.replaceFirst("[.][^.]+$", "") + ".ind");
-
         try ( //BufferedWriter bw = new BufferedWriter(new FileWriter(f2));
                 BufferedWriter bw = new BufferedWriter(new FileWriter(f2, true))) {
             bw.append(key);

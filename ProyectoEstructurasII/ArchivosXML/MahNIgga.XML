@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE XML>
+
+	<Key>
+		<int [20]> 
+			<LLave>Text here</LLave>
+		</int>
+	</Key>
+	<Key>
+		<javax.swing.JToggleButton$ToggleButtonModel@7e9dc33b [30]> 
+			<Name>Text here</Name>
+		</javax.swing.JToggleButton$ToggleButtonModel@7e9dc33b>
+	</Key>
+	<NoKey>
+		<char [20]> 
+			<City>Text here</City>
+		</char>
+	</NoKey>

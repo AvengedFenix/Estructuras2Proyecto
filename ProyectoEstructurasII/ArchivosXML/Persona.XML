@@ -2,14 +2,14 @@
 <!DOCTYPE XML>
 
 	<NoKey>
-		<char [20]> 
+		<char [30]> 
 			<Nombre>Text here</Nombre>
 		</char>
 	</NoKey>
 	<NoKey>
-		<char [20]> 
-			<Apellido>Text here</Apellido>
-		</char>
+		<int [3]> 
+			<edad>Text here</edad>
+		</int>
 	</NoKey>
 	<Key>
 		<int [8]> 

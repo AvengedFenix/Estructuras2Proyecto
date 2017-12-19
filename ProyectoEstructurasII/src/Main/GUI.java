@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -205,6 +206,7 @@ public class GUI extends javax.swing.JFrame {
         jButton14 = new javax.swing.JButton();
         bt_backtomain2 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
+        jButton28 = new javax.swing.JButton();
         jd_file2Table = new javax.swing.JDialog();
         jPanel16 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
@@ -212,7 +214,15 @@ public class GUI extends javax.swing.JFrame {
         jButton27 = new javax.swing.JButton();
         bt_backtomain5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jt_file2 = new javax.swing.JTable();
+        jd_mergedFile = new javax.swing.JDialog();
+        jPanel18 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jButton29 = new javax.swing.JButton();
+        jButton30 = new javax.swing.JButton();
+        bt_backtomain6 = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jt_file3 = new javax.swing.JTable();
         mainPanel = new javax.swing.JPanel();
         jb_addFile = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -1406,6 +1416,7 @@ public class GUI extends javax.swing.JFrame {
 
         jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_add_circle_white_24dp_1x.png"))); // NOI18N
         jButton20.setBorderPainted(false);
+        jButton20.setContentAreaFilled(false);
         jButton20.setOpaque(false);
         jButton20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1424,6 +1435,7 @@ public class GUI extends javax.swing.JFrame {
 
         jButton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_add_circle_white_24dp_1x.png"))); // NOI18N
         jButton24.setBorderPainted(false);
+        jButton24.setContentAreaFilled(false);
         jButton24.setOpaque(false);
         jButton24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1433,6 +1445,7 @@ public class GUI extends javax.swing.JFrame {
 
         jButton25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_remove_circle_white_24dp_1x.png"))); // NOI18N
         jButton25.setBorderPainted(false);
+        jButton25.setContentAreaFilled(false);
         jButton25.setOpaque(false);
         jButton25.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1498,6 +1511,7 @@ public class GUI extends javax.swing.JFrame {
 
         jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/ic_view_list_white_36dp_1x.png"))); // NOI18N
         jButton17.setBorderPainted(false);
+        jButton17.setContentAreaFilled(false);
         jButton17.setOpaque(false);
         jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1505,30 +1519,41 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        jButton28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/ic_view_list_white_36dp_1x.png"))); // NOI18N
+        jButton28.setBorderPainted(false);
+        jButton28.setContentAreaFilled(false);
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton28ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton20)
                     .addComponent(cb_file1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(cb_file3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jButton25)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton26))
-                    .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cb_file3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(jButton17)
+                        .addComponent(jButton21)
+                        .addComponent(jButton28)
+                        .addGroup(jPanel14Layout.createSequentialGroup()
+                            .addComponent(jButton25)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton26))))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton24)
                     .addComponent(cb_file2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1551,20 +1576,22 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton17)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cb_file3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton25)
                     .addComponent(jButton26))
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton28)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jd_mergeLayout = new javax.swing.GroupLayout(jd_merge.getContentPane());
         jd_merge.getContentPane().setLayout(jd_mergeLayout);
         jd_mergeLayout.setHorizontalGroup(
             jd_mergeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jd_mergeLayout.setVerticalGroup(
             jd_mergeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1620,7 +1647,7 @@ public class GUI extends javax.swing.JFrame {
             .addComponent(bt_backtomain5)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jt_file2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -1631,7 +1658,7 @@ public class GUI extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jt_file2);
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -1661,6 +1688,98 @@ public class GUI extends javax.swing.JFrame {
         jd_file2TableLayout.setVerticalGroup(
             jd_file2TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel18.setBackground(new java.awt.Color(255, 202, 40));
+
+        jPanel19.setBackground(new java.awt.Color(255, 193, 7));
+
+        jButton29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_clear_white_24dp_1x.png"))); // NOI18N
+        jButton29.setBorderPainted(false);
+        jButton29.setContentAreaFilled(false);
+        jButton29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton29ActionPerformed(evt);
+            }
+        });
+
+        jButton30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_arrow_drop_down_white_24dp_1x.png"))); // NOI18N
+        jButton30.setBorderPainted(false);
+        jButton30.setContentAreaFilled(false);
+        jButton30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton30ActionPerformed(evt);
+            }
+        });
+
+        bt_backtomain6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_forward_white_24dp_1x.png"))); // NOI18N
+        bt_backtomain6.setBorderPainted(false);
+        bt_backtomain6.setContentAreaFilled(false);
+        bt_backtomain6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_backtomain6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
+                .addComponent(bt_backtomain6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 501, Short.MAX_VALUE)
+                .addComponent(jButton30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton29))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bt_backtomain6)
+        );
+
+        jt_file3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane7.setViewportView(jt_file3);
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7)
+                .addContainerGap())
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jd_mergedFileLayout = new javax.swing.GroupLayout(jd_mergedFile.getContentPane());
+        jd_mergedFile.getContentPane().setLayout(jd_mergedFileLayout);
+        jd_mergedFileLayout.setHorizontalGroup(
+            jd_mergedFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jd_mergedFileLayout.setVerticalGroup(
+            jd_mergedFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -2512,22 +2631,20 @@ public class GUI extends javax.swing.JFrame {
             }
             if (keyExists) {
                 System.out.println("no se agrego el registro " + i + " porque ya existe la llave");
-            } else {
-                if (valid) {
-                    archivo.addRegistro(sb.toString());
-                    int reg = (int) model3.getValueAt(i, keyColumn);
-                    archivo.insertar(Integer.toString(reg), sb.toString());
-                    archivo.getLlaves().add(reg);
-                    keys.add(reg);
-                    registrosAvailable.add(reg);
-                    try {
-                        archivo.agregarRegistro(sb.toString());
-                    } catch (IOException ex) {
-                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    System.out.println("no se agrego el registro");
+            } else if (valid) {
+                archivo.addRegistro(sb.toString());
+                int reg = (int) model3.getValueAt(i, keyColumn);
+                archivo.insertar(Integer.toString(reg), sb.toString());
+                archivo.getLlaves().add(reg);
+                keys.add(reg);
+                registrosAvailable.add(reg);
+                try {
+                    archivo.agregarRegistro(sb.toString());
+                } catch (IOException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } else {
+                System.out.println("no se agrego el registro");
             }
         }
         resetTable();
@@ -2610,7 +2727,6 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        // TODO add your handling code here:
         archivo2 = new Archivos();
         Archivos file = new Archivos();
         String path = load();
@@ -2640,7 +2756,91 @@ public class GUI extends javax.swing.JFrame {
         for (int i = 0; i < archivo2.getCampos().size(); i++) {
             cb_file2.addItem(archivo2.getCampos().get(i).getName());
         }
-        mergedFile = new Archivos(archivo.getName() + "MERGED w/" + archivo2.getName());
+        mergedFile = new Archivos();
+        mergedFile.setName(archivo.getName() + " with " + archivo2.getName());
+
+//        try {
+//            listarRegistros();
+//        } catch (IOException ex) {
+//            System.out.println("no hay registros disponibles para listar");
+//            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        model4 = new DefaultTableModel();
+        model5 = new DefaultTableModel();
+        model6 = new DefaultTableModel();
+
+        if (archivo2 != null) {
+            //archivo2.setTree(new BTree());
+            keyColumn2 = 0;
+
+//            jd_fileEDIT.pack();
+//            jd_fileEDIT.setLocationRelativeTo(null);
+//            mainPanel.setEnabled(false);
+//            jd_fileEDIT.setVisible(true);
+//            this.setVisible(false);
+            registrosAvailable2.clear();
+            archivo2.getLlaves().clear();
+
+            for (int i = 0; i < archivo2.getCampos().size(); i++) {
+                String str = archivo2.getCampos().get(i).getName();
+                if (archivo2.getCampos().get(i).isKey()) {
+                    keyColumn2 = i;
+                }
+                model4.addColumn(str);
+                model5.addColumn(str);
+
+            }
+
+            int k = 0;
+            if (!archivo2.getRegistros().isEmpty()) {
+
+                for (int i = 0; i < archivo2.getRegistros().size(); i++) {
+                    String str = archivo2.getRegistros().get(i);
+
+                    StringTokenizer tok = new StringTokenizer(str, "|", false);
+                    String firstTok = tok.nextToken();
+
+                    if (firstTok.charAt(0) != '@') {
+                        System.out.println("no esta eliminado");
+                        registrosAvailable2.add(str);
+                        Object[] rowData = null;
+                        model4.addRow(rowData);
+                        for (int j = 0; j < model4.getColumnCount(); j++) {
+                            if (archivo2.getCampos().get(j).isKey()) {
+                                keyColumn2 = j;
+                            }
+                            if (tok.hasMoreTokens()) {
+                                if (j == 0) {
+                                    if (j == keyColumn2) {
+                                        archivo2.addLlave(Integer.parseInt(firstTok.replaceAll("\\*", "")));
+                                    }
+                                    model4.setValueAt(firstTok.replaceAll("\\*", ""), i - k, j);
+                                } else {
+                                    String tok3 = tok.nextToken();
+                                    if (j == keyColumn2) {
+                                        archivo2.addLlave(Integer.parseInt(tok3.replaceAll("\\*", "")));
+                                    }
+                                    model4.setValueAt(tok3.replaceAll("\\*", ""), i - k, j);
+                                }
+                            }
+                        }
+                    } else {
+                        System.out.println("eliminado");
+                        k++;
+                    }
+
+                }
+
+            }
+            jt_file2.setModel(model4);
+            lastRow2 = model4.getRowCount();
+            System.out.println(archivo2.getLlaves());
+            archivo2.printTree(registrosAvailable2);
+
+            // archivo2.llenarTree(registrosAvailable2);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please open a file");
+        }
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void bt_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarActionPerformed
@@ -2781,7 +2981,7 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No ha seleccionado ningún item");
         } else {
             cb_file3.addItem(cb_file2.getSelectedItem().toString());
-            mergedFile.addCampo(archivo2.getCampos().get(cb_file1.getSelectedIndex()));
+            mergedFile.addCampo(archivo2.getCampos().get(cb_file2.getSelectedIndex()));
         }
     }//GEN-LAST:event_jButton24ActionPerformed
 
@@ -2793,7 +2993,115 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
         // TODO add your handling code here:
+        model7 = new DefaultTableModel();
+        model8 = new DefaultTableModel();
 
+        String registro;
+
+        registro = "";
+        String[] temp = new String[mergedFile.getCampos().size()];
+        for (int i = 0; i < jt_info.getColumnCount(); i++) {
+            for (int j = 0; j < jt_info.getRowCount(); j++) {
+                for (int k = 0; k < mergedFile.getCampos().size(); k++) {
+
+                    if (mergedFile.getCampos().get(k).getName().equals(jt_info.getColumnName(i))) {
+                        model7.addColumn(mergedFile.getCampos().get(k).getName());
+                        temp[i] = jt_info.getValueAt(j, k).toString();
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < jt_file2.getColumnCount(); i++) {
+            for (int j = 0; j < jt_file2.getRowCount(); j++) {
+                for (int k = 0; k < mergedFile.getCampos().size(); k++) {
+                    if (mergedFile.getCampos().get(k).getName().equals(jt_file2.getColumnName(i))) {
+                        model7.addColumn(jt_file2.getColumnName(i));
+                        temp[i] = jt_file2.getValueAt(j, k).toString();
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < model7.getColumnCount(); i++) {
+            System.out.println("Column: " + " i> " + model7.getColumnName(i));
+
+        }
+        System.out.println(Arrays.toString(temp));
+        model7.addRow(temp);
+        jt_file3.setModel(model7);
+//        for (int j = 0; j < jt_info.getRowCount(); j++) {
+//            for (int i = 0; i < mergedFile.getCampos().size(); i++) {
+//                for (int k = 0; k < jt_info.getColumnCount(); k++) {
+//                    if (mergedFile.getCampos().get(i).getName().equals(jt_info.getColumnName(k))) {
+//                        //mergedFile.addRegistro(jt_info.getValueAt(k, j).toString());
+//                        registro += jt_info.getValueAt(j, k);
+//                        if (i == mergedFile.getCampos().size() - 1) {
+//                            registro += "\n";
+//                            System.out.println("entre a contra pleca n");
+//                        } else {
+//                            registro += "|";
+//                        }
+//                    } else {
+//                        for (int l = 0; l < jt_file2.getRowCount(); l++) {
+//                            for (int m = 0; m < jt_file2.getColumnCount(); m++) {
+//                                if (mergedFile.getCampos().get(i).getName().equals(jt_file2.getColumnName(m))) {
+//                                    registro += jt_file2.getValueAt(l, m);
+//                                    if (i == mergedFile.getCampos().size() - 1) {
+//                                        registro += "\n";
+//                                        System.out.println("entre a contra pleca n");
+//                                    } else {
+//                                        registro += "|";
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }// end for column
+//                    //System.out.println("Nothing");
+//                }//end if
+//
+//            }
+//        }//End for jt info get row count
+//        System.out.println("Registro: " + registro);
+//        for (int j = 0; j < jt_file2.getRowCount(); j++) {
+//            for (int k = 0; k < jt_file2.getColumnCount(); k++) {
+//                for (int i = 0; i < mergedFile.getCampos().size(); i++) {
+//                    if (mergedFile.getCampos().get(i).getName().equals(jt_file2.getColumnName(k))) {
+//                        //mergedFile.addRegistro(jt_file2.getValueAt(k, j).toString());
+//                        registro += jt_file2.getValueAt(j, k) + "|";
+//                    } else {
+//                    }//end for column
+//                    //System.out.println("Nothing");
+//                }//end if
+//            }
+//        }//end for row
+        registro += "\n";
+        System.out.println("Registros: " + registro);
+        mergedFile.addRegistro(registro);
+//            for (int j = 0; j < jt_info.getColumnCount(); j++) {
+//                if (mergedFile.getCampos().get(i).getName().equals(jt_info.getColumnName(j))) {
+//                    for (int k = 0; k < jt_info.getRowCount(); k++) {
+//                        //mergedFile.addRegistro(jt_info.getValueAt(k, j).toString());
+//                        registro += jt_info.getValueAt(k, j) + "|";
+//                    }// end for row
+//                } else {
+//                    System.out.println("Nothing");
+//                }//end if
+//            }//End for jt info get column count
+//            for (int j = 0; j < jt_file2.getColumnCount(); j++) {
+//                if (mergedFile.getCampos().get(i).getName().equals(jt_file2.getColumnName(j))) {
+//                    for (int k = 0; k < jt_file2.getRowCount(); k++) {
+//                        //mergedFile.addRegistro(jt_file2.getValueAt(k, j).toString());
+//                    }//end for row
+//                } else {
+//                    System.out.println("Nothing");
+//                }//end if
+//            }//end for column
+        //end for campos'
+        try {
+            mergedFile.save();
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -2836,6 +3144,25 @@ public class GUI extends javax.swing.JFrame {
         jl_openfile.setText("<no opened file>");
         bt_closefile.setVisible(false);
     }//GEN-LAST:event_bt_closefileActionPerformed
+
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+        // TODO add your handling code here:
+        jd_mergedFile.pack();
+        jd_mergedFile.setLocationRelativeTo(null);
+        jd_mergedFile.setVisible(true);
+    }//GEN-LAST:event_jButton28ActionPerformed
+
+    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton29ActionPerformed
+
+    private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton30ActionPerformed
+
+    private void bt_backtomain6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_backtomain6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_backtomain6ActionPerformed
 
     private void searchKey() {
         String key = tf_search.getText();
@@ -2926,6 +3253,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton bt_backtomain3;
     private javax.swing.JButton bt_backtomain4;
     private javax.swing.JButton bt_backtomain5;
+    private javax.swing.JButton bt_backtomain6;
     private javax.swing.JButton bt_closefile;
     private javax.swing.JButton bt_createFile;
     private javax.swing.JButton bt_edit;
@@ -2964,7 +3292,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
+    private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton30;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -2996,6 +3327,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -3010,7 +3343,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JButton jb_addFile;
     private javax.swing.JButton jb_addFile1;
     private javax.swing.JButton jb_addFile2;
@@ -3024,6 +3357,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JDialog jd_fileadd;
     private javax.swing.JDialog jd_listar;
     private javax.swing.JDialog jd_merge;
+    private javax.swing.JDialog jd_mergedFile;
     private javax.swing.JDialog jd_modificar;
     private javax.swing.JDialog jd_search;
     private javax.swing.JLabel jl_fileName;
@@ -3032,6 +3366,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JList<String> jl_registros2;
     private javax.swing.JPanel jp_addFile;
     private javax.swing.JPanel jp_addFileTopBar;
+    private javax.swing.JTable jt_file2;
+    private javax.swing.JTable jt_file3;
     private javax.swing.JTable jt_info;
     private javax.swing.JTable jt_info2;
     private javax.swing.JTable jt_search;
@@ -3060,12 +3396,20 @@ public class GUI extends javax.swing.JFrame {
     ArrayList indexOffsets = new ArrayList();
     ArrayList keys = new ArrayList();
     ArrayList registrosAvailable = new ArrayList();
+    ArrayList registrosAvailable2 = new ArrayList();
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
     DefaultTableModel model3 = new DefaultTableModel();
+    DefaultTableModel model4 = new DefaultTableModel();
+    DefaultTableModel model5 = new DefaultTableModel();
+    DefaultTableModel model6 = new DefaultTableModel();
+    DefaultTableModel model7 = new DefaultTableModel();
+    DefaultTableModel model8 = new DefaultTableModel();
     boolean hasKey;
     int lastRow;
+    int lastRow2;
     int keyColumn;
+    int keyColumn2;
 
     public void exit() {
         int p = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit");

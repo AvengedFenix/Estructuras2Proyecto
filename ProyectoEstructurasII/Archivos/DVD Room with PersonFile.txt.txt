@@ -1,0 +1,4 @@
+CD Room: char[12]:n,   Rooth: char[12]:n, PersonID: int[6]:k,  PersonName: char[30]:n, 
+
+
+

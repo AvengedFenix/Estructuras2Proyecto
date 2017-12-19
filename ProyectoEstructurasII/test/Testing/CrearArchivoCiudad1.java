@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Clases;
+package Testing;
 
 //import Testing.*;
+import Clases.*;
 import Clases.Archivos;
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +15,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class CrearArchivoCiudad {
+public class CrearArchivoCiudad1 {
 
     public static void main(String[] args) throws IOException {
        /* ArrayList<Integer> cityID = new ArrayList();

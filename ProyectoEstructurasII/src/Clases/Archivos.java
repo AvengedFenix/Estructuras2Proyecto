@@ -348,12 +348,10 @@ public class Archivos {
 
     public String buscarTree(String key) {
         String val = (String) tree.get(Integer.parseInt(key));
-
         return val;
     }
 
     public void eliminar(String key, ArrayList disponibles) {
-        //tree.remover(Integer.parseInt(key));
         printTree(disponibles);
         //System.out.println(tree.toString());
     }

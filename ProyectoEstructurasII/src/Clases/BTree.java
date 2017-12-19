@@ -5,19 +5,17 @@ import java.util.Scanner;
 
 public class BTree<Key extends Comparable<Key>, Value> {
 
-    // max children per B-tree node = M-1
-    // (must be even and greater than 2)
     private static final int M = 6;
 
-    private Node root;       // root of the B-tree
-    private int height;      // height of the B-tree
-    private int n;           // number of key-value pairs in the B-tree
+    private Node root;
+    private int height;
+    private int n;           // numero total de llaves (nodos externos)
 
     // helper B-tree node data type
     private static final class Node {
 
-        private int m;                             // number of children
-        private Llave[] children = new Llave[M];   // the array of children
+        private int m;                             // numero de llaves
+        private Llave[] children = new Llave[M];   // arreglo de llaves
 
         // create a node with k children
         private Node(int k) {
@@ -25,13 +23,13 @@ public class BTree<Key extends Comparable<Key>, Value> {
         }
     }
 
-    // internal nodes: only use key and next
-    // external nodes: only use key and value
+    // nodos internos: solo key y next
+    // nodos externos: solo key y value
     private static class Llave {
 
         private Comparable key;
         private final Object val;
-        private Node next;     // helper field to iterate over array entries
+        private Node next;
 
         public Llave(Comparable key, Object val, Node next) {
             this.key = key;
@@ -46,9 +44,6 @@ public class BTree<Key extends Comparable<Key>, Value> {
     private boolean intNode = false;
     private int nodeHeight = 0;
 
-    /**
-     * Initializes an empty B-tree.
-     */
     public BTree() {
         root = new Node(0);
     }
@@ -65,42 +60,18 @@ public class BTree<Key extends Comparable<Key>, Value> {
         return num;
     }
 
-    /**
-     * Returns true if this symbol table is empty.
-     *
-     * @return {@code true} if this symbol table is empty; {@code false}
-     * otherwise
-     */
     public boolean isEmpty() {
         return size() == 0;
     }
 
-    /**
-     * Returns the number of key-value pairs in this symbol table.
-     *
-     * @return the number of key-value pairs in this symbol table
-     */
     public int size() {
         return n;
     }
 
-    /**
-     * Returns the height of this B-tree (for debugging).
-     *
-     * @return the height of this B-tree
-     */
     public int height() {
         return height;
     }
 
-    /**
-     * Returns the value associated with the given key.
-     *
-     * @param key the key
-     * @return the value associated with the given key if the key is in the
-     * symbol table and {@code null} if the key is not in the symbol table
-     * @throws IllegalArgumentException if {@code key} is {@code null}
-     */
     public Value get(Key key) {
         if (key == null) {
             throw new IllegalArgumentException("argument to get() is null");
@@ -120,23 +91,23 @@ public class BTree<Key extends Comparable<Key>, Value> {
                     if (children[j].next != null) {
                         adjacentNodes.add(children[j].next);
                     }
-                    System.out.println("FOUND KEY " + children[j].key);
+//                    System.out.println("FOUND KEY " + children[j].key);
                     System.out.println("IN NODE: ");
                     for (int i = 0; i < currentNode.m; i++) {
                         System.out.print(children[i].key + "; ");
                     }
-                    System.out.println("\nIN HEIGHT " + nodeHeight);
-                    System.out.println("IS IT INTERNAL? " + intNode);
-                    System.out.println("THESE ARE ADJACENT ");
-                    for (int i = 0; i < adjacentNodes.size(); i++) {
-                        System.out.println(i + ")");
-                        for (int k = 0; k < adjacentNodes.get(i).m; k++) {
-                            System.out.print(adjacentNodes.get(i).children[k].key + "; ");
-                        }
-                        System.out.println("");
-                    }
-                    System.out.println("LOCATED AT " + adjacentNodes.indexOf(currentNode));
-                    System.out.println("");
+//                    System.out.println("\nIN HEIGHT " + nodeHeight);
+//                    System.out.println("IS IT INTERNAL? " + intNode);
+//                    System.out.println("THESE ARE ADJACENT ");
+//                    for (int i = 0; i < adjacentNodes.size(); i++) {
+//                        System.out.println(i + ")");
+//                        for (int k = 0; k < adjacentNodes.get(i).m; k++) {
+//                            System.out.print(adjacentNodes.get(i).children[k].key + "; ");
+//                        }
+//                        System.out.println("");
+//                    }
+//                    System.out.println("LOCATED AT " + adjacentNodes.indexOf(currentNode));
+//                    System.out.println("");
                     return (Value) children[j].val;
                 }
             }
@@ -166,16 +137,6 @@ public class BTree<Key extends Comparable<Key>, Value> {
         return null;
     }
 
-    /**
-     * Inserts the key-value pair into the symbol table, overwriting the old
-     * value with the new value if the key is already in the symbol table. If
-     * the value is {@code null}, this effectively deletes the key from the
-     * symbol table.
-     *
-     * @param key the key
-     * @param val the value
-     * @throws IllegalArgumentException if {@code key} is {@code null}
-     */
     public void put(Key key, Value val) {
         if (key == null) {
             throw new IllegalArgumentException("argument key to put() is null");
@@ -230,7 +191,6 @@ public class BTree<Key extends Comparable<Key>, Value> {
         }
     }
 
-    // split node in half
     private Node split(Node h) {
         Node t = new Node(M / 2);
         h.m = M / 2;
@@ -378,12 +338,12 @@ public class BTree<Key extends Comparable<Key>, Value> {
             }
             nod.children = remove(index, nod.children);
             nod.m--;
-            
+
             System.out.println("NEW NODE: ");
             for (int i = 0; i < nod.m; i++) {
                 System.out.println(nod.children[i].key + ", ");
             }
-            
+
             Node a = new Node(arr.size());
             for (int i = 0; i < arr.size(); i++) {
                 a.children[i] = arr.get(i);
@@ -461,10 +421,10 @@ public class BTree<Key extends Comparable<Key>, Value> {
             bgreater = true;
         }
 
-        if (!bgreater) {    
+        if (!bgreater) {
             fatherKey = (Key) a.children[0].key;
-        } 
-        
+        }
+
         get(fatherKey);
 
         ArrayList<Llave> keys = new ArrayList();
@@ -555,11 +515,6 @@ public class BTree<Key extends Comparable<Key>, Value> {
         return newArr;
     }
 
-    /**
-     * Returns a string representation of this B-tree (for debugging).
-     *
-     * @return a string representation of this B-tree.
-     */
     public String toString() {
         return toString(root, height, "") + "\n";
     }
@@ -583,63 +538,12 @@ public class BTree<Key extends Comparable<Key>, Value> {
         return s.toString();
     }
 
-    // comparison functions - make Comparable instead of Key to avoid casts
     private boolean less(Comparable k1, Comparable k2) {
         return k1.compareTo(k2) < 0;
     }
 
     private boolean eq(Comparable k1, Comparable k2) {
         return k1.compareTo(k2) == 0;
-    }
-
-    /**
-     * Unit tests the {@code BTree} data type.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-        BTree<String, String> st = new BTree<String, String>();
-
-        st.put("www.cs.princeton.edu", "128.112.136.12");
-        st.put("www.cs.princeton.edu", "128.112.136.11");
-        st.put("www.princeton.edu", "128.112.128.15");
-        st.put("www.yale.edu", "130.132.143.21");
-        st.put("www.simpsons.com", "209.052.165.60");
-        st.put("www.apple.com", "17.112.152.32");
-        st.put("www.amazon.com", "207.171.182.16");
-        st.put("www.ebay.com", "66.135.192.87");
-        st.put("www.cnn.com", "64.236.16.20");
-        st.put("www.google.com", "216.239.41.99");
-        st.put("www.nytimes.com", "199.239.136.200");
-        st.put("www.microsoft.com", "207.126.99.140");
-        st.put("www.dell.com", "143.166.224.230");
-        st.put("www.slashdot.org", "66.35.250.151");
-        st.put("www.espn.com", "199.181.135.201");
-        st.put("www.weather.com", "63.111.66.11");
-        st.put("www.yahoo.com", "216.109.118.65");
-
-        System.out.println("cs.princeton.edu:  " + st.get("www.cs.princeton.edu"));
-        System.out.println("hardvardsucks.com: " + st.get("www.harvardsucks.com"));
-        System.out.println("simpsons.com:      " + st.get("www.simpsons.com"));
-        System.out.println("apple.com:         " + st.get("www.apple.com"));
-        System.out.println("ebay.com:          " + st.get("www.ebay.com"));
-        System.out.println("dell.com:          " + st.get("www.dell.com"));
-        System.out.println();
-
-        System.out.println("size:    " + st.size());
-        System.out.println("height:  " + st.height());
-        System.out.println(st);
-        System.out.println();
-        Scanner sc = new Scanner(System.in);
-        st.put("13", "Kullo");
-        System.out.println("Do you want to search s/n");
-        String resp = sc.nextLine();
-        while ("s".equals(resp) || "S".equals(resp)) {
-            sc = new Scanner(System.in);
-            System.out.println("Which key do you want to get?");
-            String key = sc.nextLine();
-            System.out.println("You printed: " + st.get(key));
-        }
     }
 
 }

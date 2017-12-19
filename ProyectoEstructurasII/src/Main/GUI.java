@@ -68,6 +68,8 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
+        bt_closefile.setVisible(false);
+        this.pack();
         /* setTitle("Stacker");
         setSize(380, 650);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -220,9 +222,10 @@ public class GUI extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jl_openfile = new javax.swing.JLabel();
         bt_fileedit = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        bt_closefile = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
 
         jd_addFile.setBackground(new java.awt.Color(0, 137, 123));
         jd_addFile.setForeground(new java.awt.Color(0, 137, 123));
@@ -1701,7 +1704,7 @@ public class GUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 646, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1))
@@ -1725,7 +1728,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jl_openfile.setFont(new java.awt.Font("Gotham Bold", 0, 18)); // NOI18N
+        jl_openfile.setFont(new java.awt.Font("Gotham Bold", 0, 20)); // NOI18N
         jl_openfile.setForeground(new java.awt.Color(255, 255, 255));
         jl_openfile.setText("<no opened file>");
 
@@ -1738,10 +1741,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Gotham Medium", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("E D I T   F I L E ");
-
         jLabel12.setFont(new java.awt.Font("Gotham Medium", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("O P E N   F I L E ");
@@ -1749,6 +1748,20 @@ public class GUI extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Gotham Medium", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("C R E A T E   F I L E ");
+
+        bt_closefile.setFont(new java.awt.Font("Gotham Medium", 0, 14)); // NOI18N
+        bt_closefile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_add_circle_white_18dp_2x.png"))); // NOI18N
+        bt_closefile.setBorderPainted(false);
+        bt_closefile.setContentAreaFilled(false);
+        bt_closefile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_closefileActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Gotham Medium", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("E D I T   F I L E ");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -1759,42 +1772,50 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(233, 233, 233)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel10)
-                    .addComponent(jl_openfile))
-                .addContainerGap(232, Short.MAX_VALUE))
+                    .addComponent(jl_openfile)
+                    .addComponent(bt_closefile, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addGap(21, 504, Short.MAX_VALUE)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(459, 459, 459)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jb_addFile, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_fileedit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jb_addFile, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(bt_fileedit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, Short.MAX_VALUE))
                 .addGap(38, 38, 38))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+            .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
                 .addComponent(jLabel10)
                 .addGap(52, 52, 52)
                 .addComponent(jl_openfile)
-                .addGap(121, 121, 121)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_fileedit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bt_closefile, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_fileedit, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jb_addFile, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52))
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_addFile, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1957,7 +1978,7 @@ public class GUI extends javax.swing.JFrame {
         model = new DefaultTableModel();
         archivo.setName(filename.substring(0, filename.length() - 4));
         jl_openfile.setText(filename.substring(0, filename.length() - 4));
-
+        bt_closefile.setVisible(true);
         try {
             cargarIndexFile();
         } catch (FileNotFoundException ex) {
@@ -1973,19 +1994,18 @@ public class GUI extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        try {
-            // TODO add your handling code here:
-            listarRegistros();
-        } catch (IOException ex) {
-            System.out.println("no hay registros disponibles para listar");
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         model = new DefaultTableModel();
         model2 = new DefaultTableModel();
         model3 = new DefaultTableModel();
 
         if (archivo != null) {
+            try {
+                // TODO add your handling code here:
+                listarRegistros();
+            } catch (IOException ex) {
+                System.out.println("no hay registros disponibles para listar");
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
             archivo.setTree(new BTree());
             keyColumn = 0;
 
@@ -2017,7 +2037,7 @@ public class GUI extends javax.swing.JFrame {
                     String firstTok = tok.nextToken();
 
                     if (firstTok.charAt(0) != '@') {
-                        System.out.println("no esta eliminado");
+                        //System.out.println("no esta eliminado");
                         registrosAvailable.add(str);
                         Object[] rowData = null;
                         model.addRow(rowData);
@@ -2041,7 +2061,7 @@ public class GUI extends javax.swing.JFrame {
                             }
                         }
                     } else {
-                        System.out.println("eliminado");
+                        //System.out.println("eliminado");
                         k++;
                     }
 
@@ -2263,13 +2283,9 @@ public class GUI extends javax.swing.JFrame {
             // TODO add your handling code here:
             int reg = Integer.parseInt(tf_search.getText());
 
-            int index = archivo.getLlaves().indexOf(reg);
-            //archivo.getLlaves().remove(index);
-            //keys.remove(index);
-            //registrosAvailable.remove(index);
             //elimina el registro en la posicion x del text field
             archivo.delete(reg);
-            archivo.eliminar(tf_search.getText(), registrosAvailable);
+            eliminarReg(reg);
 
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -2444,8 +2460,11 @@ public class GUI extends javax.swing.JFrame {
             } else {
                 if (valid) {
                     archivo.addRegistro(sb.toString());
-                    archivo.insertar((String) model3.getValueAt(i, keyColumn), sb.toString());
-
+                    int reg = (int) model3.getValueAt(i, keyColumn);
+                    archivo.insertar(Integer.toString(reg), sb.toString());
+                    archivo.getLlaves().add(reg);
+                    keys.add(reg);
+                    registrosAvailable.add(reg);
                     try {
                         archivo.agregarRegistro(sb.toString());
                     } catch (IOException ex) {
@@ -2493,6 +2512,7 @@ public class GUI extends javax.swing.JFrame {
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2597,9 +2617,14 @@ public class GUI extends javax.swing.JFrame {
     private void bt_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarActionPerformed
         // TODO add your handling code here:
         StringBuilder sb = new StringBuilder();
+        String old = tf_search.getText();
+        int reg = 0;
 
         for (int i = 0; i < archivo.getCampos().size(); i++) {
             String s = JOptionPane.showInputDialog("Ingrese " + archivo.getCampos().get(i).getName());
+            if (archivo.getCampos().get(i).isKey()) {
+                reg = Integer.parseInt(s);
+            }
             if (s.length() < archivo.getCampos().get(i).getLength()) {
                 sb.append(s);
                 sb.append(extraSpaces(archivo.getCampos().get(i).getLength() - s.length()));
@@ -2617,6 +2642,7 @@ public class GUI extends javax.swing.JFrame {
         }
 
         try {
+            modificarReg(old, reg, sb.toString());
             archivo.modificar(Integer.parseInt(tf_search.getText()), sb.toString());
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -2775,6 +2801,13 @@ public class GUI extends javax.swing.JFrame {
         jd_merge.setVisible(true);
     }//GEN-LAST:event_bt_backtomain5ActionPerformed
 
+    private void bt_closefileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_closefileActionPerformed
+        // TODO add your handling code here:
+        archivo = new Archivos();
+        jl_openfile.setText("<no opened file>");
+        bt_closefile.setVisible(false);
+    }//GEN-LAST:event_bt_closefileActionPerformed
+
     private void searchKey() {
         String key = tf_search.getText();
         String value = archivo.buscarTree(key);
@@ -2790,6 +2823,28 @@ public class GUI extends javax.swing.JFrame {
             }
         }
         jt_search.setModel(model2);
+    }
+
+    public void eliminarReg(int reg) {
+        int index = archivo.getLlaves().indexOf(reg);
+        archivo.getLlaves().remove(index);
+        keys.remove((Object) reg);
+        registrosAvailable.remove((Object) reg);
+        archivo.eliminar(tf_search.getText(), registrosAvailable);
+    }
+
+    public void modificarReg(String prev, int reg, String val) throws IOException {
+        int old = Integer.parseInt(prev);
+        archivo.getLlaves().remove((Object) old);
+        keys.remove((Object) old);
+        registrosAvailable.remove((Object) old);
+        archivo.eliminar(tf_search.getText(), registrosAvailable);
+        archivo.delete(reg);
+
+        archivo.insertar(Integer.toString(reg), val);
+        archivo.getLlaves().add(reg);
+        keys.add(reg);
+        registrosAvailable.add(reg);
     }
 
     /**
@@ -2842,6 +2897,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton bt_backtomain3;
     private javax.swing.JButton bt_backtomain4;
     private javax.swing.JButton bt_backtomain5;
+    private javax.swing.JButton bt_closefile;
     private javax.swing.JButton bt_createFile;
     private javax.swing.JButton bt_edit;
     private javax.swing.JButton bt_eliminar;
@@ -2888,11 +2944,11 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -3415,5 +3471,4 @@ public class GUI extends javax.swing.JFrame {
                     }
          */
     }
-
 }

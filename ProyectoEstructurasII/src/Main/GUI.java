@@ -2393,61 +2393,6 @@ public class GUI extends javax.swing.JFrame {
             jt_info2.getCellEditor().stopCellEditing();
         }
 
-        /*for (int i = 0; i < model.getRowCount(); i++) {
-            int totalspaces = 0;
-            sb = new StringBuilder();
-            
-            
-            for (int j = 0; j < model.getColumnCount(); j++) {
-                int tamano = archivo.getCampos().get(j).getLength();
-                System.out.println("tamano: " + tamano);
-
-                //totalSpaces = tamano - ((String)model.getValueAt(i,j)).length();
-                totalspaces += tamano - ((String)model.getValueAt(i,j)).length();
-                if (j == model.getColumnCount() - 1) {
-                    //sb.append((String)model.getValueAt(i, j));
-                    //sb.append(totalSpaces == 0 ? (String) model.getValueAt(i, j) : (String) model.getValueAt(i, j) + extraSpaces(totalSpaces));
-                    sb.append(((String) model.getValueAt(i, j)).length() < tamano ? (String) model.getValueAt(i, j) : (String) model.getValueAt(i, j) + extraSpaces(tamano));
-                    //sb.append((String) model.getValueAt(i, j));
-                } else {
-                    //sb.append((String)model.getValueAt(i, j)).append("|");
-                    //sb.append((String) model.getValueAt(i, j)).append("\");
-                    sb.append(totalSpaces == 0 ? (String) model.getValueAt(i, j) + "|" : (String) model.getValueAt(i, j) + extraSpaces(totalSpaces) + "|");
-                    //sb.append(((String) model.getValueAt(i, j)).length() < tamano ? (String) model.getValueAt(i, j) + "|" : (String) model.getValueAt(i, j) + extraSpaces(tamano) + "|");
-                }
-            }
-            
-            //if(archivo.getLlaves())
-            
-            if(!keyExists(Integer.parseInt((String)model.getValueAt(i, keyColumn)))){
-                sb.append(extraSpaces(totalspaces));
-                archivo.addRegistro(sb.toString());
-            }else{
-                System.out.println("ya existe");
-            }
-        }
-        //lastRow = model.getRowCount();
-        try {
-            archivo.save();
-
-        } catch (IOException ex) {
-            System.out.println("error");
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("arbol imprimiendo");
-        
-        /*
-        DefaultTableModel dtm = (DefaultTableModel)jt_info.getModel();
-        for (int i = dtm.getRowCount() - 1; i >= 0; i--) {
-           
-            dtm.removeRow(i);
-        }*/
- /*BufferedWriter bfw;
-        try {
-            bfw = new BufferedWriter(new FileWriter(index));
-        } catch (IOException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < model3.getRowCount(); i++) {
             boolean valid = true;
@@ -2533,29 +2478,54 @@ public class GUI extends javax.swing.JFrame {
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < archivo.getCampos().size(); i++) {
-            String s = JOptionPane.showInputDialog("Ingrese " + archivo.getCampos().get(i).getName());
-            if (s.length() < archivo.getCampos().get(i).getLength()) {
-                sb.append(s);
-                sb.append(extraSpaces(archivo.getCampos().get(i).getLength() - s.length()));
-            } else if (s.length() > archivo.getCampos().get(i).getLength()) {
-                while (s.length() > archivo.getCampos().get(i).getLength()) {
-                    s = JOptionPane.showInputDialog("Tamano invalido, ingrese " + archivo.getCampos().get(i).getName());
-                }
-            } else {
-                sb.append(s);
-            }
-
-            if (i < archivo.getCampos().size() - 1) {
-                sb.append("|");
-            }
-        }
-
+        boolean valid = true;
         try {
-            archivo.modificar(Integer.parseInt(tf_modificar.getText()), sb.toString());
+            RandomAccessFile raf = new RandomAccessFile("./Archivos/" + archivo.getName() + ".txt", "rw");
+            int tamanoArchivo = (int) raf.length();
+
+            int cantidadRegistros = (tamanoArchivo - archivo.getHeaderSize()) / archivo.getTamanoReg();
+
+            if (Integer.parseInt(tf_modificar.getText()) <= cantidadRegistros) {
+                valid = true;
+            } else {
+                valid = false;
+            }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        if (valid == true) {
+            for (int i = 0; i < archivo.getCampos().size(); i++) {
+                String s = JOptionPane.showInputDialog("Ingrese " + archivo.getCampos().get(i).getName());
+                if (s.length() < archivo.getCampos().get(i).getLength()) {
+                    sb.append(s);
+                    sb.append(extraSpaces(archivo.getCampos().get(i).getLength() - s.length()));
+                } else if (s.length() > archivo.getCampos().get(i).getLength()) {
+                    while (s.length() > archivo.getCampos().get(i).getLength()) {
+                        s = JOptionPane.showInputDialog("Tamano invalido, ingrese " + archivo.getCampos().get(i).getName());
+                    }
+                } else {
+                    sb.append(s);
+                }
+
+                if (i < archivo.getCampos().size() - 1) {
+                    sb.append("|");
+                }
+            }
+
+            try {
+                archivo.modificar(Integer.parseInt(tf_modificar.getText()), sb.toString());
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rb_int, "Error! No existe ese registro");
+            tf_modificar.setText("");
+        }
+
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void bt_backtomain4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_backtomain4ActionPerformed
@@ -3382,7 +3352,7 @@ public class GUI extends javax.swing.JFrame {
 
                 String line = raf.readLine();
                 System.out.println("readline: " + line);
-/*                while(line.equals("")){
+                /*                while(line.equals("")){
                     System.out.println("entro while");
                     raf.readLine();
                 }*/
@@ -3445,7 +3415,5 @@ public class GUI extends javax.swing.JFrame {
                     }
          */
     }
-    
-    
 
 }

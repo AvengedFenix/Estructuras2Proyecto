@@ -3012,90 +3012,13 @@ public class GUI extends javax.swing.JFrame {
                 }
             }
         }
-//        for (int i = 0; i < mergedFile.getCampos().size(); i++) {
-//            for (int j = 0; j < jt_file2.getColumnCount(); j++) {
-//                for (int k = 0; k < jt_file2.getRowCount(); k++) {
-//                    if (mergedFile.getCampos().get(i).getName().equals(jt_file2.getColumnName(j))) {
-//                        //model7.addColumn(mergedFile.getCampos().get(i).getName());
-//                        temp[i] = jt_file2.getValueAt(k, j).toString();
-//                        System.out.println(Arrays.toString(temp));
-//                        model7.addRow(temp);
-//                    }
-//                }
-//            }
-//        }
         for (int i = 0; i < model7.getColumnCount(); i++) {
             System.out.println("Column: " + i + "> " + model7.getColumnName(i));
         }
 
-//        for (int j = 0; j < jt_info.getRowCount(); j++) {
-//            for (int i = 0; i < mergedFile.getCampos().size(); i++) {
-//                for (int k = 0; k < jt_info.getColumnCount(); k++) {
-//                    if (mergedFile.getCampos().get(i).getName().equals(jt_info.getColumnName(k))) {
-//                        //mergedFile.addRegistro(jt_info.getValueAt(k, j).toString());
-//                        registro += jt_info.getValueAt(j, k);
-//                        if (i == mergedFile.getCampos().size() - 1) {
-//                            registro += "\n";
-//                            System.out.println("entre a contra pleca n");
-//                        } else {
-//                            registro += "|";
-//                        }
-//                    } else {
-//                        for (int l = 0; l < jt_file2.getRowCount(); l++) {
-//                            for (int m = 0; m < jt_file2.getColumnCount(); m++) {
-//                                if (mergedFile.getCampos().get(i).getName().equals(jt_file2.getColumnName(m))) {
-//                                    registro += jt_file2.getValueAt(l, m);
-//                                    if (i == mergedFile.getCampos().size() - 1) {
-//                                        registro += "\n";
-//                                        System.out.println("entre a contra pleca n");
-//                                    } else {
-//                                        registro += "|";
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }// end for column
-//                    //System.out.println("Nothing");
-//                }//end if
-//
-//            }
-//        }//End for jt info get row count
-//        System.out.println("Registro: " + registro);
-//        for (int j = 0; j < jt_file2.getRowCount(); j++) {
-//            for (int k = 0; k < jt_file2.getColumnCount(); k++) {
-//                for (int i = 0; i < mergedFile.getCampos().size(); i++) {
-//                    if (mergedFile.getCampos().get(i).getName().equals(jt_file2.getColumnName(k))) {
-//                        //mergedFile.addRegistro(jt_file2.getValueAt(k, j).toString());
-//                        registro += jt_file2.getValueAt(j, k) + "|";
-//                    } else {
-//                    }//end for column
-//                    //System.out.println("Nothing");
-//                }//end if
-//            }
-//        }//end for row
         registro += "\n";
         System.out.println("Registros: " + registro);
         mergedFile.addRegistro(registro);
-//            for (int j = 0; j < jt_info.getColumnCount(); j++) {
-//                if (mergedFile.getCampos().get(i).getName().equals(jt_info.getColumnName(j))) {
-//                    for (int k = 0; k < jt_info.getRowCount(); k++) {
-//                        //mergedFile.addRegistro(jt_info.getValueAt(k, j).toString());
-//                        registro += jt_info.getValueAt(k, j) + "|";
-//                    }// end for row
-//                } else {
-//                    System.out.println("Nothing");
-//                }//end if
-//            }//End for jt info get column count
-//            for (int j = 0; j < jt_file2.getColumnCount(); j++) {
-//                if (mergedFile.getCampos().get(i).getName().equals(jt_file2.getColumnName(j))) {
-//                    for (int k = 0; k < jt_file2.getRowCount(); k++) {
-//                        //mergedFile.addRegistro(jt_file2.getValueAt(k, j).toString());
-//                    }//end for row
-//                } else {
-//                    System.out.println("Nothing");
-//                }//end if
-//            }//end for column
-        //end for campos'
         try {
             mergedFile.save();
         } catch (IOException ex) {

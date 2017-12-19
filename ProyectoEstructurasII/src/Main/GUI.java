@@ -159,6 +159,7 @@ public class GUI extends javax.swing.JFrame {
         jt_info = new javax.swing.JTable();
         bt_merge = new javax.swing.JButton();
         jb_index = new javax.swing.JButton();
+        jb_listar1 = new javax.swing.JButton();
         jd_search = new javax.swing.JDialog();
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -227,6 +228,10 @@ public class GUI extends javax.swing.JFrame {
         bt_backtomain6 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         jt_file3 = new javax.swing.JTable();
+        jd_listarCampos = new javax.swing.JDialog();
+        jPanel20 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jl_listarCampos = new javax.swing.JList<>();
         mainPanel = new javax.swing.JPanel();
         jb_addFile = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -936,10 +941,26 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jb_index.setText("Index");
+        jb_index.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WhatsApp Image 2017-12-19 at 11.36.21 AM.jpeg"))); // NOI18N
+        jb_index.setBorderPainted(false);
+        jb_index.setContentAreaFilled(false);
         jb_index.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_indexActionPerformed(evt);
+            }
+        });
+
+        jb_listar1.setFont(new java.awt.Font("Gotham Medium", 0, 12)); // NOI18N
+        jb_listar1.setForeground(new java.awt.Color(255, 255, 255));
+        jb_listar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/ic_view_list_white_36dp_1x.png"))); // NOI18N
+        jb_listar1.setText("C A M P O S");
+        jb_listar1.setBorderPainted(false);
+        jb_listar1.setContentAreaFilled(false);
+        jb_listar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jb_listar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jb_listar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_listar1ActionPerformed(evt);
             }
         });
 
@@ -951,16 +972,18 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(70, Short.MAX_VALUE)
+                        .addContainerGap(84, Short.MAX_VALUE)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(bt_removereg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bt_addregistry, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                            .addComponent(bt_addregistry, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jb_index, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(bt_excel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_listar1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bt_search)
                         .addGap(50, 50, 50)
@@ -979,7 +1002,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                         .addComponent(jb_index)
                         .addGap(67, 67, 67)
                         .addComponent(bt_removereg)
@@ -995,7 +1018,8 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(bt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jb_listar)
                     .addComponent(bt_merge)
-                    .addComponent(bt_excel))
+                    .addComponent(bt_excel)
+                    .addComponent(jb_listar1))
                 .addGap(27, 27, 27))
         );
 
@@ -1466,7 +1490,6 @@ public class GUI extends javax.swing.JFrame {
         jButton26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_check_circle_white_24dp_1x.png"))); // NOI18N
         jButton26.setBorderPainted(false);
         jButton26.setContentAreaFilled(false);
-        jButton26.setOpaque(false);
         jButton26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton26ActionPerformed(evt);
@@ -1792,6 +1815,38 @@ public class GUI extends javax.swing.JFrame {
         jd_mergedFileLayout.setVerticalGroup(
             jd_mergedFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel20.setBackground(new java.awt.Color(255, 202, 40));
+
+        jScrollPane8.setViewportView(jl_listarCampos);
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jd_listarCamposLayout = new javax.swing.GroupLayout(jd_listarCampos.getContentPane());
+        jd_listarCampos.getContentPane().setLayout(jd_listarCamposLayout);
+        jd_listarCamposLayout.setHorizontalGroup(
+            jd_listarCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jd_listarCamposLayout.setVerticalGroup(
+            jd_listarCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -3090,6 +3145,29 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_backtomain6ActionPerformed
 
+    private void jb_listar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_listar1ActionPerformed
+        // TODO add your handling code here:
+        DefaultListModel listmodel = new DefaultListModel();
+        jd_listarCampos.setLocationRelativeTo(null);
+        jd_listarCampos.pack();
+        jd_listarCampos.setVisible(true);
+
+        for (int i = 0; i < archivo.getCampos().size(); i++) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Nombre campo: ").append(archivo.getCampos().get(i).getName());
+            sb.append(", size: ").append(archivo.getCampos().get(i).getLength());
+            listmodel.addElement(sb.toString());
+        }
+
+        jl_listarCampos.setModel(listmodel);
+
+        jd_listarCampos.pack();
+        jd_listarCampos.setLocationRelativeTo(null);
+        jd_listarCampos.setVisible(true);
+
+
+    }//GEN-LAST:event_jb_listar1ActionPerformed
+
     private void searchKey() {
         for (int i = 0; i < model2.getRowCount(); i++) {
             model2.removeRow(i);
@@ -3266,6 +3344,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -3280,12 +3359,14 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JButton jb_addFile;
     private javax.swing.JButton jb_addFile1;
     private javax.swing.JButton jb_addFile2;
     private javax.swing.JButton jb_completeFile;
     private javax.swing.JButton jb_index;
     private javax.swing.JButton jb_listar;
+    private javax.swing.JButton jb_listar1;
     private javax.swing.JDialog jd_addCampos;
     private javax.swing.JDialog jd_addFile;
     private javax.swing.JDialog jd_editCampos;
@@ -3293,12 +3374,14 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JDialog jd_fileEDIT;
     private javax.swing.JDialog jd_fileadd;
     private javax.swing.JDialog jd_listar;
+    private javax.swing.JDialog jd_listarCampos;
     private javax.swing.JDialog jd_merge;
     private javax.swing.JDialog jd_mergedFile;
     private javax.swing.JDialog jd_modificar;
     private javax.swing.JDialog jd_search;
     private javax.swing.JLabel jl_fileName;
     private javax.swing.JLabel jl_key;
+    private javax.swing.JList<String> jl_listarCampos;
     private javax.swing.JLabel jl_openfile;
     private javax.swing.JList<String> jl_registros2;
     private javax.swing.JPanel jp_addFile;

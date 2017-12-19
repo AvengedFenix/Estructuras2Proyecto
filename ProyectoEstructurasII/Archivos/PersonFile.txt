@@ -554,8 +554,8 @@ PersonID: int[7]:k, PersonName: char[30]:n, PersonAge: int[3]:n, CityID: int[2]:
 5552***|Maximus Brooks****************|33*|30
 5553***|Eli Scott*********************|8**|3*
 5554***|Stella Thompson***************|4**|38
-5555***|Adalynn Neri******************|82*|77
-5556***|Chloe Martino*****************|22*|14
+5555***|Jean Cerrato******************|18*|78
+4999***|Mario*************************|18*|65
 5557***|Nicole Castelli***************|56*|66
 5558***|Sarah Perez*******************|23*|55
 5559***|Maverick Parker***************|88*|19

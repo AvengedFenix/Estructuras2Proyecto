@@ -1,18 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE XML>
 
-	<NoKey>
 		<char [12]> 
-			<CD Room>Text here</CD Room>
+			<CD Room>Mast</CD Room>
+			<CD Room>Pija</CD Room>
+			<CD Room>Verga</CD Room>
+			<CD Room>Imbecil</CD Room>
+			<CD Room>Mierda</CD Room>
+			<CD Room>Anus</CD Room>
+			<CD Room>Rooth</CD Room>
+			<CD Room>Awaked</CD Room>
+			<CD Room>Despertado</CD Room>
+			<CD Room>Butterfly</CD Room>
+			<CD Room>Beerd</CD Room>
+			<CD Room>Aleteo</CD Room>
+			<CD Room>Mariposa</CD Room>
+			<CD Room>Alguien</CD Room>
+			<CD Room>Awaken</CD Room>
+			<CD Room>Nombre</CD Room>
+			<CD Room>Negro</CD Room>
+			<CD Room>Raiz</CD Room>
+			<CD Room>Tooth</CD Room>
 		</char>
-	</NoKey>
-	<NoKey>
 		<char [12]> 
-			<Rooth>Text here</Rooth>
+			<  Rooth>24</  Rooth>
+			<  Rooth>434</  Rooth>
+			<  Rooth>4546</  Rooth>
+			<  Rooth>657</  Rooth>
+			<  Rooth>354</  Rooth>
+			<  Rooth>43564</  Rooth>
+			<  Rooth>5423</  Rooth>
+			<  Rooth>423</  Rooth>
+			<  Rooth>342</  Rooth>
+			<  Rooth>9876</  Rooth>
+			<  Rooth>876</  Rooth>
+			<  Rooth>765</  Rooth>
+			<  Rooth>674</  Rooth>
+			<  Rooth>32</  Rooth>
+			<  Rooth>23</  Rooth>
+			<  Rooth>2765</  Rooth>
+			<  Rooth>63</  Rooth>
+			<  Rooth>323</  Rooth>
+			<  Rooth>325</  Rooth>
 		</char>
-	</NoKey>
-	<Key>
 		<int [4]> 
-			<CD Rooth>Text here</CD Rooth>
+			<  CD Rooth>34</  CD Rooth>
+			<  CD Rooth>45</  CD Rooth>
+			<  CD Rooth>56</  CD Rooth>
+			<  CD Rooth>67</  CD Rooth>
+			<  CD Rooth>12</  CD Rooth>
+			<  CD Rooth>18</  CD Rooth>
+			<  CD Rooth>2</  CD Rooth>
+			<  CD Rooth>9</  CD Rooth>
+			<  CD Rooth>98</  CD Rooth>
+			<  CD Rooth>78</  CD Rooth>
+			<  CD Rooth>85</  CD Rooth>
+			<  CD Rooth>90</  CD Rooth>
+			<  CD Rooth>76</  CD Rooth>
+			<  CD Rooth>109</  CD Rooth>
+			<  CD Rooth>500</  CD Rooth>
+			<  CD Rooth>633</  CD Rooth>
+			<  CD Rooth>623</  CD Rooth>
+			<  CD Rooth>342</  CD Rooth>
+			<  CD Rooth>345</  CD Rooth>
 		</int>
-	</Key>

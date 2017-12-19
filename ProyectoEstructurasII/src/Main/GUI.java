@@ -64,8 +64,6 @@ import jxl.write.biff.RowsExceededException;
  *
  * @author Maslz
  */
-
-
 public class GUI extends javax.swing.JFrame {
 
     /**
@@ -1424,13 +1422,14 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jd_merge.setUndecorated(true);
+
         jPanel14.setBackground(new java.awt.Color(255, 202, 40));
         jPanel14.setForeground(new java.awt.Color(255, 202, 40));
 
         jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_add_circle_white_24dp_1x.png"))); // NOI18N
         jButton20.setBorderPainted(false);
         jButton20.setContentAreaFilled(false);
-        jButton20.setOpaque(false);
         jButton20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton20ActionPerformed(evt);
@@ -1449,7 +1448,6 @@ public class GUI extends javax.swing.JFrame {
         jButton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_add_circle_white_24dp_1x.png"))); // NOI18N
         jButton24.setBorderPainted(false);
         jButton24.setContentAreaFilled(false);
-        jButton24.setOpaque(false);
         jButton24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton24ActionPerformed(evt);
@@ -1459,7 +1457,6 @@ public class GUI extends javax.swing.JFrame {
         jButton25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_remove_circle_white_24dp_1x.png"))); // NOI18N
         jButton25.setBorderPainted(false);
         jButton25.setContentAreaFilled(false);
-        jButton25.setOpaque(false);
         jButton25.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton25ActionPerformed(evt);
@@ -1468,6 +1465,7 @@ public class GUI extends javax.swing.JFrame {
 
         jButton26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_check_circle_white_24dp_1x.png"))); // NOI18N
         jButton26.setBorderPainted(false);
+        jButton26.setContentAreaFilled(false);
         jButton26.setOpaque(false);
         jButton26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1525,7 +1523,6 @@ public class GUI extends javax.swing.JFrame {
         jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/ic_view_list_white_36dp_1x.png"))); // NOI18N
         jButton17.setBorderPainted(false);
         jButton17.setContentAreaFilled(false);
-        jButton17.setOpaque(false);
         jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton17ActionPerformed(evt);
@@ -1702,6 +1699,8 @@ public class GUI extends javax.swing.JFrame {
             jd_file2TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jd_mergedFile.setUndecorated(true);
 
         jPanel18.setBackground(new java.awt.Color(255, 202, 40));
 
@@ -2981,36 +2980,54 @@ public class GUI extends javax.swing.JFrame {
         String registro;
 
         registro = "";
+
+        for (int i = 0; i < mergedFile.getCampos().size(); i++) {
+            model7.addColumn(mergedFile.getCampos().get(i).getName());
+        }
         String[] temp = new String[mergedFile.getCampos().size()];
-        for (int i = 0; i < jt_info.getColumnCount(); i++) {
-            for (int j = 0; j < jt_info.getRowCount(); j++) {
-                for (int k = 0; k < mergedFile.getCampos().size(); k++) {
+        for (int i = 0; i < mergedFile.getCampos().size(); i++) {
+            for (int j = 0; j < jt_info.getColumnCount(); j++) {
+                for (int k = 0; k < jt_info.getRowCount(); k++) {
+                    if (mergedFile.getCampos().get(i).getName().equals(jt_info.getColumnName(j))) {
+                        //model7.addColumn(mergedFile.getCampos().get(i).getName());
+                        temp[i] = jt_info.getValueAt(k, j).toString();
+                        //----------------------------------------------------------------------------
+                        for (int l = 0; l < mergedFile.getCampos().size(); l++) {
+                            for (int m = 0; m < jt_file2.getColumnCount(); m++) {
+                                for (int n = 0; n < jt_file2.getRowCount(); n++) {
+                                    if (mergedFile.getCampos().get(l).getName().equals(jt_file2.getColumnName(m))) {
+                                        //model7.addColumn(mergedFile.getCampos().get(i).getName());
+                                        temp[l] = jt_file2.getValueAt(n, m).toString();
+                                        System.out.println(Arrays.toString(temp));
 
-                    if (mergedFile.getCampos().get(k).getName().equals(jt_info.getColumnName(i))) {
-                        model7.addColumn(mergedFile.getCampos().get(k).getName());
-                        temp[i] = jt_info.getValueAt(j, k).toString();
+                                        //model7.addRow(temp);
+                                    }
+                                }
+                            }
+                        }
+                        //--------------------------------------------------------------------------------------------
+                        System.out.println(Arrays.toString(temp));
+                        //model7.addRow(temp);
                     }
                 }
             }
         }
-
-        for (int i = 0; i < jt_file2.getColumnCount(); i++) {
-            for (int j = 0; j < jt_file2.getRowCount(); j++) {
-                for (int k = 0; k < mergedFile.getCampos().size(); k++) {
-                    if (mergedFile.getCampos().get(k).getName().equals(jt_file2.getColumnName(i))) {
-                        model7.addColumn(jt_file2.getColumnName(i));
-                        temp[i] = jt_file2.getValueAt(j, k).toString();
-                    }
-                }
-            }
-        }
+//        for (int i = 0; i < mergedFile.getCampos().size(); i++) {
+//            for (int j = 0; j < jt_file2.getColumnCount(); j++) {
+//                for (int k = 0; k < jt_file2.getRowCount(); k++) {
+//                    if (mergedFile.getCampos().get(i).getName().equals(jt_file2.getColumnName(j))) {
+//                        //model7.addColumn(mergedFile.getCampos().get(i).getName());
+//                        temp[i] = jt_file2.getValueAt(k, j).toString();
+//                        System.out.println(Arrays.toString(temp));
+//                        model7.addRow(temp);
+//                    }
+//                }
+//            }
+//        }
         for (int i = 0; i < model7.getColumnCount(); i++) {
-            System.out.println("Column: " + " i> " + model7.getColumnName(i));
-
+            System.out.println("Column: " + i + "> " + model7.getColumnName(i));
         }
-        System.out.println(Arrays.toString(temp));
-        model7.addRow(temp);
-        jt_file3.setModel(model7);
+
 //        for (int j = 0; j < jt_info.getRowCount(); j++) {
 //            for (int i = 0; i < mergedFile.getCampos().size(); i++) {
 //                for (int k = 0; k < jt_info.getColumnCount(); k++) {
@@ -3149,7 +3166,6 @@ public class GUI extends javax.swing.JFrame {
     private void bt_backtomain6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_backtomain6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_backtomain6ActionPerformed
-
 
     private void searchKey() {
         for (int i = 0; i < model2.getRowCount(); i++) {
@@ -3469,31 +3485,28 @@ public class GUI extends javax.swing.JFrame {
             String path = "./ArchivosXML/" + fileName + ".XML";
             System.out.println("Name: " + fileName);
             File f = new File(path);
-            String saving = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n";
+            String saving = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<!DOCTYPE XML>\n\n";
             BufferedWriter writer = new BufferedWriter(new FileWriter(f));
             if (!archivo.getCampos().isEmpty()) {
-                for (int i = 0; i < archivo.getCampos().size(); i++) {
-                    if (archivo.getCampos().get(i).isKey() == true) {
-                        saving += "\t<Key>\n";
-                    }
+
+                //Esto va dentro de un for
+                for (int i = 0; i < model.getColumnCount(); i++) {
                     saving += "\t\t<" + campos.get(i).getType() + " [" + campos.get(i).getLength() + "]> \n";
-                    //Esto va dentro de un for
-                    for (int j = 0; j < model.getColumnCount(); j++) {
+
+                    for (int j = 0; j < model.getRowCount(); j++) {
                         if (campos.get(i).getName().equals(model.getColumnName(i))) {
-
-                            for (int k = 0; k < model.getRowCount(); k++) {
-                                saving += "\t\t\t<" + campos.get(i).getName() + ">" + model.getValueAt(k, j) + "</" + campos.get(i).getName() + ">\n";
-                            }
-
+                            saving += "\t\t\t<" + campos.get(i).getName() + ">" + model.getValueAt(j, i) + "</" + campos.get(i).getName() + ">\n";
                         }
                     }
+
                     saving += "\t\t</" + campos.get(i).getType() + ">\n";
-                    if (archivo.getCampos().get(i).isKey() == true) {
-                        saving += "\t</Key>\n";
-                    }
-                    //saving = "";
-                    //writer.append(saving);
                 }
+//                if (archivo.getCampos().get(j).isKey() == true) {
+//                    saving += "\t</Key>\n";
+//                }
+                //saving = "";
+                //writer.append(saving);
+
                 writer.write(saving);
 
             }

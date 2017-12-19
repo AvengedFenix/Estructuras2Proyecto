@@ -1,0 +1,4 @@
+CD Room: char[12]:n,   Rooth: char[12]:n, Cuarto: int[23]:n,  DVD Room: double[23]:n, 
+
+
+

@@ -38,31 +38,32 @@ public class CrearArchivoCiudad {
         }
         System.out.println("Array ID " + cityID.toString());
         //StringBuilder sb = new StringBuilder();
-        String sb = "";
+        //String sb = "";
 
         for (int i = 0; i < 100; i++) {
-
+            StringBuilder sb = new StringBuilder();
             System.out.println("Ultimo for: " + i);
-            sb = cityID.get(i).toString();
+            sb.append(cityID.get(i).toString());
             //System.out.println("sb " + sb + " length " + ID.get(i).toString().length());
             if (cityID.get(i).toString().length() <= 2) {
                 for (int j = cityID.get(i).toString().length(); j <= 6; j++) {
-                    sb += "*";
+                    sb.append("*");
                 }
             }
-            sb += "|" + cityName.get(i);
+            sb.append("|").append(cityName.get(i));
             if (cityName.get(i).length() < 30) {
                 for (int j = cityName.get(i).length(); j < 30; j++) {
-                    sb += "*";
+                    sb.append("*");
                 }
             }
 
             System.out.println(sb);
-            a.addRegistro(sb);
+            a.addRegistro(sb.toString());
+            a.agregarRegistro(sb.toString());
         }
 
         System.out.println(a.getRegistros().toString());
-        a.save();
+        //a.save();
     }
 
 }

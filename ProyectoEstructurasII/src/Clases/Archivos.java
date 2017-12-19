@@ -134,7 +134,7 @@ public class Archivos {
         writer.close();
     }
 
-    public void agregarRegistro(String registro) throws IOException {//utilizando la avail list
+    public int agregarRegistro(String registro) throws IOException {//utilizando la avail list
         String path = "./Archivos/" + name;
         // System.out.println("path: " + path);
         String avail = path + ".avail";
@@ -146,8 +146,9 @@ public class Archivos {
 
         File f = new File(pathReg);
         BufferedWriter writer = new BufferedWriter(new FileWriter(f, true));
+        int rrn = -1;
         try {
-            int posicion;            
+           // int posicion;            
             RandomAccessFile raf2 = new RandomAccessFile(path + ".avail" , "rw");
             //System.out.println("length archivo: " +raf2.length());
 
@@ -160,7 +161,7 @@ public class Archivos {
                     //System.out.println("readline " + s);
                 }
 
-                int rrn = Integer.parseInt(s.replace(" ", ""));
+                rrn = Integer.parseInt(s.replace(" ", ""));
 
 
             if (rrn == -1) {//significa que no hay archivos borrados
@@ -168,6 +169,8 @@ public class Archivos {
                 writer.append(registro);
                 writer.append("\n");
                 writer.flush();
+                writer.close();
+                return -1;
             } else {
                 modificar(rrn, registro);
 
@@ -182,7 +185,7 @@ public class Archivos {
             writer.close();
 
         }
-
+        return rrn;
     }
 
 

@@ -2346,7 +2346,7 @@ PersonID: int[7]:k, PersonName: char[30]:n, PersonAge: int[3]:n, CityID: int[2]:
 7344***|Ellie Sanchez*****************|39*|13
 7345***|Sophie James******************|27*|98
 7346***|Vivian Conte******************|67*|73
-7347***|Lincoln Martin****************|49*|34
+7347***|Lincoln Andrews***************|43*|34
 7348***|Matteo Caruso*****************|43*|16
 7349***|Max Gutierrez*****************|26*|45
 7350***|Nathan Carter*****************|86*|42

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE XML>
+
+	<Key>
+		<int [2]> 
+			<CityID>Text here</CityID>
+		</int>
+	</Key>
+	<NoKey>
+		<char [30]> 
+			<CityName>Text here</CityName>
+		</char>
+	</NoKey>

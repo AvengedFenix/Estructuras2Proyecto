@@ -1844,11 +1844,11 @@ public class GUI extends javax.swing.JFrame {
         rb_int.setActionCommand("int");
         rb_double.setActionCommand("double");
         rb_char.setActionCommand("char");
-        
+
         jd_addCampos.setVisible(false);
         boolean key;
         String type = bg_type.getSelection().getActionCommand();
-        
+
         if (chb_key.isSelected() && !hasKey) {
             key = true;
             hasKey = true;
@@ -1938,7 +1938,7 @@ public class GUI extends javax.swing.JFrame {
         archivo.getCampos().get(position).setKey(chb_keyEdit.isSelected());
         try {
             archivo.save();
-            
+
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1956,7 +1956,7 @@ public class GUI extends javax.swing.JFrame {
             file = archivo.read(path);
             BufferedReader br = new BufferedReader(new FileReader(path));
             String header = br.readLine();
-            
+
             System.out.println("tamano header: " + header.length());
             file.setHeaderSize(header.length() + 1);
             int tamanoReg = 0;
@@ -1964,7 +1964,7 @@ public class GUI extends javax.swing.JFrame {
             for (int i = 0; i < file.getCampos().size(); i++) {
                 tamanoReg += file.getCampos().get(i).getLength();
             }
-            
+
             tamanoReg += (file.getCampos().size() - 1) + 1;//se le agregan la cantidad de delimitadores y el byte del salto de linea
             System.out.println("tamano registro: " + tamanoReg);
             file.setTamanoReg(tamanoReg);
@@ -1997,7 +1997,7 @@ public class GUI extends javax.swing.JFrame {
         model = new DefaultTableModel();
         model2 = new DefaultTableModel();
         model3 = new DefaultTableModel();
-        
+
         if (archivo != null) {
             try {
                 // TODO add your handling code here:
@@ -2008,7 +2008,7 @@ public class GUI extends javax.swing.JFrame {
             }
             archivo.setTree(new BTree());
             keyColumn = 0;
-            
+
             jd_fileEDIT.pack();
             jd_fileEDIT.setLocationRelativeTo(null);
             mainPanel.setEnabled(false);
@@ -2016,7 +2016,7 @@ public class GUI extends javax.swing.JFrame {
             this.setVisible(false);
             registrosAvailable.clear();
             archivo.getLlaves().clear();
-            
+
             for (int i = 0; i < archivo.getCampos().size(); i++) {
                 String str = archivo.getCampos().get(i).getName();
                 if (archivo.getCampos().get(i).isKey()) {
@@ -2024,18 +2024,18 @@ public class GUI extends javax.swing.JFrame {
                 }
                 model.addColumn(str);
                 model2.addColumn(str);
-                
+
             }
-            
+
             int k = 0;
             if (!archivo.getRegistros().isEmpty()) {
-                
+
                 for (int i = 0; i < archivo.getRegistros().size(); i++) {
                     String str = archivo.getRegistros().get(i);
-                    
+
                     StringTokenizer tok = new StringTokenizer(str, "|", false);
                     String firstTok = tok.nextToken();
-                    
+
                     if (firstTok.charAt(0) != '@') {
                         //System.out.println("no esta eliminado");
                         registrosAvailable.add(str);
@@ -2064,9 +2064,9 @@ public class GUI extends javax.swing.JFrame {
                         //System.out.println("eliminado");
                         k++;
                     }
-                    
+
                 }
-                
+
             }
             jt_info.setModel(model);
             lastRow = model.getRowCount();
@@ -2146,7 +2146,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_createFileActionPerformed
 
     private void jb_completeFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_completeFileActionPerformed
-        
+
         try {
             if (hasKey) {
                 cb_campos.setVisible(false);
@@ -2161,7 +2161,7 @@ public class GUI extends javax.swing.JFrame {
                 archivo.save();
                 archivo.saveXML();
                 this.setVisible(true);
-                
+
                 File f = new File("./Archivos/" + archivo.getName() + ".avail");
                 File f2 = new File("./Archivos/" + archivo.getName() + ".ind");
                 BufferedWriter bw = new BufferedWriter(new FileWriter(f));
@@ -2169,11 +2169,11 @@ public class GUI extends javax.swing.JFrame {
                 bw2.close();
                 bw.append("-1   ,");
                 bw.close();
-                
+
             } else {
                 JOptionPane.showMessageDialog(jd_fileEDIT, "No key has been selected");
             }
-            
+
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2194,7 +2194,7 @@ public class GUI extends javax.swing.JFrame {
         }
         cb_campos = new JComboBox(model);
         cb_campos.updateUI();*/
-            
+
             cb_campos.removeAllItems();
             for (int i = 0; i < archivo.getCampos().size(); i++) {
                 cb_campos.addItem(archivo.getCampos().get(i).getName());
@@ -2202,7 +2202,7 @@ public class GUI extends javax.swing.JFrame {
         } else {
             System.out.println("ya no hay mas campos");
         }
-        
+
 
     }//GEN-LAST:event_bt_removeCamposActionPerformed
 
@@ -2286,7 +2286,7 @@ public class GUI extends javax.swing.JFrame {
             //elimina el registro en la posicion x del text field
             archivo.delete(reg);
             eliminarReg(reg);
-            
+
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2307,15 +2307,15 @@ public class GUI extends javax.swing.JFrame {
         model2 = new DefaultTableModel();
         model3 = new DefaultTableModel();
         if (archivo != null) {
-            
+
             keyColumn = 0;
-            
+
             jd_fileEDIT.pack();
             jd_fileEDIT.setLocationRelativeTo(null);
             mainPanel.setEnabled(false);
             jd_fileEDIT.setVisible(true);
             this.setVisible(false);
-            
+
             for (int i = 0; i < archivo.getCampos().size(); i++) {
                 String str = archivo.getCampos().get(i).getName();
                 if (archivo.getCampos().get(i).isKey()) {
@@ -2323,18 +2323,18 @@ public class GUI extends javax.swing.JFrame {
                 }
                 model.addColumn(str);
                 model2.addColumn(str);
-                
+
             }
-            
+
             int k = 0;
             if (!archivo.getRegistros().isEmpty()) {
-                
+
                 for (int i = 0; i < archivo.getRegistros().size(); i++) {
                     String str = archivo.getRegistros().get(i);
-                    
+
                     StringTokenizer tok = new StringTokenizer(str, "|", false);
                     String firstTok = tok.nextToken();
-                    
+
                     if (firstTok.charAt(0) != '@') {
                         System.out.println("no esta eliminado");
                         registrosAvailable.add(str);
@@ -2363,9 +2363,9 @@ public class GUI extends javax.swing.JFrame {
                         System.out.println("eliminado");
                         k++;
                     }
-                    
+
                 }
-                
+
             }
             jt_info.setModel(model);
             lastRow = model.getRowCount();
@@ -2469,12 +2469,12 @@ public class GUI extends javax.swing.JFrame {
             boolean valid = true;
             boolean keyExists = false;
             sb = new StringBuilder();
-            
+
             for (int j = 0; j < model3.getColumnCount(); j++) {
                 int tamano = archivo.getCampos().get(j).getLength();
                 System.out.println("tamano: " + tamano);
                 int totalSpaces;
-                
+
                 if (archivo.getCampos().get(j).isKey()) {
                     keyColumn = j;
                     if (!keys.contains(Integer.parseInt((String) model3.getValueAt(i, keyColumn)))) {
@@ -2551,7 +2551,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         StringBuilder sb = new StringBuilder();
-        
+
         for (int i = 0; i < archivo.getCampos().size(); i++) {
             String s = JOptionPane.showInputDialog("Ingrese " + archivo.getCampos().get(i).getName());
             if (s.length() < archivo.getCampos().get(i).getLength()) {
@@ -2564,12 +2564,12 @@ public class GUI extends javax.swing.JFrame {
             } else {
                 sb.append(s);
             }
-            
+
             if (i < archivo.getCampos().size() - 1) {
                 sb.append("|");
             }
         }
-        
+
         try {
             archivo.modificar(Integer.parseInt(tf_modificar.getText()), sb.toString());
         } catch (IOException ex) {
@@ -2618,7 +2618,7 @@ public class GUI extends javax.swing.JFrame {
             file = archivo2.read(path);
             BufferedReader br = new BufferedReader(new FileReader(path));
             String header = br.readLine();
-            
+
             System.out.println("tamano header: " + header.length());
             file.setHeaderSize(header.length() + 1);
             int tamanoReg = 0;
@@ -2626,7 +2626,7 @@ public class GUI extends javax.swing.JFrame {
             for (int i = 0; i < file.getCampos().size(); i++) {
                 tamanoReg += file.getCampos().get(i).getLength();
             }
-            
+
             tamanoReg += (file.getCampos().size() - 1) + 1;//se le agregan la cantidad de delimitadores y el byte del salto de linea
             System.out.println("tamano registro: " + tamanoReg);
             file.setTamanoReg(tamanoReg);
@@ -2636,7 +2636,7 @@ public class GUI extends javax.swing.JFrame {
         }
         filename2 = file.getName();
         archivo2 = file;
-        
+
         for (int i = 0; i < archivo2.getCampos().size(); i++) {
             cb_file2.addItem(archivo2.getCampos().get(i).getName());
         }
@@ -2648,7 +2648,7 @@ public class GUI extends javax.swing.JFrame {
         StringBuilder sb = new StringBuilder();
         String old = tf_search.getText();
         int reg = 0;
-        
+
         for (int i = 0; i < archivo.getCampos().size(); i++) {
             String s = JOptionPane.showInputDialog("Ingrese " + archivo.getCampos().get(i).getName());
             if (archivo.getCampos().get(i).isKey()) {
@@ -2664,12 +2664,12 @@ public class GUI extends javax.swing.JFrame {
             } else {
                 sb.append(s);
             }
-            
+
             if (i < archivo.getCampos().size() - 1) {
                 sb.append("|");
             }
         }
-        
+
         try {
             modificarReg(old, reg, sb.toString());
             archivo.modificar(Integer.parseInt(tf_search.getText()), sb.toString());
@@ -2709,7 +2709,7 @@ public class GUI extends javax.swing.JFrame {
         jd_search.pack();
         jd_search.setLocationRelativeTo(null);
         jd_search.setVisible(true);
-        
+
         jt_search.setModel(model2);
     }//GEN-LAST:event_bt_searchActionPerformed
 
@@ -2725,7 +2725,7 @@ public class GUI extends javax.swing.JFrame {
                 excel.setFileName(archivo.getName());
                 excel.setOutputFile("./ArchivosXML/" + archivo.getName() + ".xls");
                 excel.write();
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (WriteException ex) {
@@ -2836,13 +2836,13 @@ public class GUI extends javax.swing.JFrame {
         jl_openfile.setText("<no opened file>");
         bt_closefile.setVisible(false);
     }//GEN-LAST:event_bt_closefileActionPerformed
-    
+
     private void searchKey() {
         String key = tf_search.getText();
         String value = archivo.buscarTree(key);
-        
+
         System.out.println(value);
-        
+
         StringTokenizer tok = new StringTokenizer(value, "|", false);
         Object[] rowData = null;
         model2.addRow(rowData);
@@ -2853,7 +2853,7 @@ public class GUI extends javax.swing.JFrame {
         }
         jt_search.setModel(model2);
     }
-    
+
     public void eliminarReg(int reg) {
         int index = archivo.getLlaves().indexOf(reg);
         archivo.getLlaves().remove(index);
@@ -2861,15 +2861,15 @@ public class GUI extends javax.swing.JFrame {
         registrosAvailable.remove((Object) reg);
         archivo.eliminar(tf_search.getText(), registrosAvailable);
     }
-    
+
     public void modificarReg(String prev, int reg, String val) throws IOException {
         int old = Integer.parseInt(prev);
+        archivo.delete(old);
         archivo.getLlaves().remove((Object) old);
         keys.remove((Object) old);
         registrosAvailable.remove((Object) old);
         archivo.eliminar(tf_search.getText(), registrosAvailable);
-        archivo.delete(reg);
-        
+
         archivo.insertar(Integer.toString(reg), val);
         archivo.getLlaves().add(reg);
         keys.add(reg);
@@ -3066,23 +3066,23 @@ public class GUI extends javax.swing.JFrame {
     boolean hasKey;
     int lastRow;
     int keyColumn;
-    
+
     public void exit() {
         int p = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit");
         if (p == 0) {
             System.exit(0);
         }
     }
-    
+
     public String load() {
         JFileChooser fileChooser = new JFileChooser("./Archivos/");
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        
+
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de texto", "txt");
         fileChooser.setFileFilter(filtro);
-        
+
         int seleccion = fileChooser.showOpenDialog(this);
-        
+
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             File dir = fileChooser.getSelectedFile();
             filename = dir.getName();
@@ -3092,37 +3092,37 @@ public class GUI extends javax.swing.JFrame {
             return null;
         }
     }
-    
+
     private class XML {
-        
+
         String fileName;
         ArrayList<Campos> campos = new ArrayList();
         ArrayList<String> registros = new ArrayList();
-        
+
         public String getFileName() {
             return fileName;
         }
-        
+
         public void setFileName(String fileName) {
             this.fileName = fileName;
         }
-        
+
         public ArrayList<Campos> getCampos() {
             return campos;
         }
-        
+
         public void setCampos(ArrayList<Campos> campos) {
             this.campos = campos;
         }
-        
+
         public ArrayList<String> getRegistros() {
             return registros;
         }
-        
+
         public void setRegistros(ArrayList<String> registros) {
             this.registros = registros;
         }
-        
+
         public void saveXML() throws IOException {
             String path = "./ArchivosXML/" + fileName + ".XML";
             System.out.println("Name: " + fileName);
@@ -3138,11 +3138,11 @@ public class GUI extends javax.swing.JFrame {
                     //Esto va dentro de un for
                     for (int j = 0; j < model.getColumnCount(); j++) {
                         if (campos.get(i).getName().equals(model.getColumnName(i))) {
-                            
+
                             for (int k = 0; k < model.getRowCount(); k++) {
                                 saving += "\t\t\t<" + campos.get(i).getName() + ">" + model.getValueAt(k, j) + "</" + campos.get(i).getName() + ">\n";
                             }
-                            
+
                         }
                     }
                     saving += "\t\t</" + campos.get(i).getType() + ">\n";
@@ -3153,60 +3153,60 @@ public class GUI extends javax.swing.JFrame {
                     //writer.append(saving);
                 }
                 writer.write(saving);
-                
+
             }
-            
+
             writer.close();
         }
-        
+
     }
-    
+
     public class WriteExcel {
-        
+
         private WritableCellFormat timesBoldUnderline;
         private WritableCellFormat times;
         private String inputFile;
         private String fileName;
         private ArrayList<Campos> campos = new ArrayList();
         CellView cv;
-        
+
         public ArrayList<Campos> getCampos() {
             return campos;
         }
-        
+
         public void setCampos(ArrayList<Campos> campos) {
             this.campos = campos;
         }
-        
+
         public void setOutputFile(String inputFile) {
             this.inputFile = inputFile;
         }
-        
+
         public String getFileName() {
             return fileName;
         }
-        
+
         public void setFileName(String fileName) {
             this.fileName = fileName;
         }
-        
+
         public void write() throws IOException, WriteException {
             String path = "./ArchivosXML/" + fileName + ".xls";
             File file = new File(path);
             WorkbookSettings wbSettings = new WorkbookSettings();
-            
+
             wbSettings.setLocale(new Locale("en", "EN"));
-            
+
             WritableWorkbook workbook = Workbook.createWorkbook(file, wbSettings);
             workbook.createSheet("Report", 0);
             WritableSheet excelSheet = workbook.getSheet(0);
             createLabel(excelSheet);
             createContent(excelSheet);
-            
+
             workbook.write();
             workbook.close();
         }
-        
+
         private void createLabel(WritableSheet sheet)
                 throws WriteException {
             // Lets create a times font
@@ -3221,7 +3221,7 @@ public class GUI extends javax.swing.JFrame {
             timesBoldUnderline = new WritableCellFormat(times10ptBoldUnderline);
             // Lets automatically wrap the cells
             timesBoldUnderline.setWrap(true);
-            
+
             cv = new CellView();
             cv.setFormat(times);
             cv.setFormat(timesBoldUnderline);
@@ -3233,9 +3233,9 @@ public class GUI extends javax.swing.JFrame {
                 addCaption(sheet, i, 0, archivo.getCampos().get(i).getName());
             }
         }
-        
+
         private void createContent(WritableSheet sheet) throws WriteException, RowsExceededException {
-            
+
             for (int i = 0; i < model.getColumnCount(); i++) {
                 for (int j = 0; j < model.getRowCount(); j++) {
                     addLabel(sheet, i, j + 1, (String) model.getValueAt(j, i));
@@ -3243,21 +3243,21 @@ public class GUI extends javax.swing.JFrame {
             }
             cv.setAutosize(true);
         }
-        
+
         private void addCaption(WritableSheet sheet, int column, int row, String s)
                 throws RowsExceededException, WriteException {
             Label label;
             label = new Label(column, row, s, timesBoldUnderline);
             sheet.addCell(label);
         }
-        
+
         private void addNumber(WritableSheet sheet, int column, int row,
                 Integer integer) throws WriteException, RowsExceededException {
             jxl.write.Number number;
             number = new jxl.write.Number(column, row, integer, times);
             sheet.addCell(number);
         }
-        
+
         private void addLabel(WritableSheet sheet, int column, int row, String s)
                 throws WriteException, RowsExceededException {
             Label label;
@@ -3265,17 +3265,17 @@ public class GUI extends javax.swing.JFrame {
             sheet.addCell(label);
         }
     }
-    
+
     public String extraSpaces(int count) {
         StringBuilder sb = new StringBuilder();
-        
+
         for (int i = 0; i < count; i++) {
             sb.append("*");
         }
-        
+
         return sb.toString();
     }
-    
+
     public void resetTable() {
         // model = new DefaultTableModel();
         model3 = new DefaultTableModel();
@@ -3283,18 +3283,18 @@ public class GUI extends javax.swing.JFrame {
             String str = archivo.getCampos().get(i).getName();
             model3.addColumn(str);
         }
-        
+
         jt_info2.setModel(model3);
         //jt_info.setModel(model3);
     }
-    
+
     public boolean keyExists(int key) {
         if (archivo.getLlaves().contains(key)) {
             return false;
         }
         return true;
     }
-    
+
     public void addToIndex(String key, int offset) throws IOException {
 
         //System.out.println("filename: " + filename);
@@ -3308,14 +3308,14 @@ public class GUI extends javax.swing.JFrame {
             bw.append(",");
             bw.append(Integer.toString(offset));
             bw.append(";");
-            
+
             bw.close();
-            
+
             cargarIndexFile();
         }
-        
+
     }
-    
+
     public void cargarIndexFile() throws FileNotFoundException {
         //System.out.println("filename: " + filename);
         keys = new ArrayList();
@@ -3326,7 +3326,7 @@ public class GUI extends javax.swing.JFrame {
         try {
             sc = new Scanner(new File("./Archivos/" + filename.replaceFirst("[.][^.]+$", "") + ".ind"));
             sc.useDelimiter(";");
-            
+
             while (sc.hasNext()) {
                 StringTokenizer st = new StringTokenizer(sc.next(), ",", false);
                 int key = Integer.parseInt(st.nextToken());
@@ -3353,7 +3353,7 @@ public class GUI extends javax.swing.JFrame {
         //StringTokenizer token = new StringTokenizer(header, ",", false);
          */
     }
-    
+
     public void listar2() throws FileNotFoundException {
         DefaultListModel listmodel = new DefaultListModel();
         //JList list = new JList((ListModel) model);
@@ -3361,15 +3361,15 @@ public class GUI extends javax.swing.JFrame {
         //File f2 = new File("./Archivos/" + archivo.getName() + ".ind");
         try {
             RandomAccessFile raf = new RandomAccessFile("./Archivos/" + archivo.getName() + ".txt", "rw");
-            
+
             int cantidadReg = (int) (raf.length() - archivo.getHeaderSize()) / archivo.getTamanoReg();
-            
+
             for (int posicion = 1; posicion <= cantidadReg; posicion++) {
                 int offset = archivo.getHeaderSize() + ((posicion - 1) * archivo.getTamanoReg());
                 raf.seek(offset);
                 StringBuilder sb = new StringBuilder();
                 sb.append(posicion).append(" ");
-                
+
                 String line = raf.readLine();
                 System.out.println("readline: " + line);
                 if (line != null && line.length() > 0 && (line.charAt(0)) != '@') {
@@ -3396,18 +3396,18 @@ public class GUI extends javax.swing.JFrame {
                     System.out.println("registro eliminado");
                     //k++;
                 }
-                
+
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
-        
+
         jl_registros2.setModel(listmodel);
-        
+
     }
-    
+
     public void listarRegistros() throws FileNotFoundException, IOException {
         //resetTable();
         DefaultListModel listmodel = new DefaultListModel();
@@ -3419,22 +3419,22 @@ public class GUI extends javax.swing.JFrame {
             RandomAccessFile raf = new RandomAccessFile("./Archivos/" + archivo.getName() + ".txt", "rw");
             Scanner s = new Scanner(br);
             s.useDelimiter(";");
-            
+
             int count = 0;
             int k = 0;
             while (s.hasNext()) {
                 String elemento = s.next();
                 System.out.println("elemento: " + elemento);
                 String[] x = elemento.split(",");
-                
+
                 int posicion = Integer.parseInt(x[1]);
-                
+
                 int offset = archivo.getHeaderSize() + ((posicion - 1) * archivo.getTamanoReg());
                 //System.out.println("offset: " + offset);
                 raf.seek(offset);
                 StringBuffer sb = new StringBuffer();
                 sb.append(count + 1).append(" ");
-                
+
                 String line = raf.readLine();
                 System.out.println("readline: " + line);
                 /*                while(line.equals("")){
@@ -3500,5 +3500,5 @@ public class GUI extends javax.swing.JFrame {
                     }
          */
     }
-    
+
 }

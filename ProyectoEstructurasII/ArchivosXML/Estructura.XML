@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE XML>
+
+		<int [2]> 
+			<Clase>1</Clase>
+			<Clase>2</Clase>
+			<Clase>3</Clase>
+			<Clase>4</Clase>
+			<Clase>5</Clase>
+			<Clase>6</Clase>
+			<Clase>7</Clase>
+			<Clase>8</Clase>
+			<Clase>10</Clase>
+			<Clase>66</Clase>
+			<Clase>77</Clase>
+			<Clase>78</Clase>
+		</int>
+		<char [20]> 
+			< Nombre>Mario</ Nombre>
+			< Nombre>Calvin</ Nombre>
+			< Nombre>Andre</ Nombre>
+			< Nombre>Rooth</ Nombre>
+			< Nombre>Dad</ Nombre>
+			< Nombre>Sevilla</ Nombre>
+			< Nombre>Amaya</ Nombre>
+			< Nombre>Ruth</ Nombre>
+			< Nombre>Toothpaste</ Nombre>
+			< Nombre>Calvin Diabolico</ Nombre>
+			< Nombre>Andre Diabolico</ Nombre>
+			< Nombre>Mario Diabolico</ Nombre>
+		</char>
+		<double [3]> 
+			< Nota>99</ Nota>
+			< Nota>99</ Nota>
+			< Nota>99</ Nota>
+			< Nota>80</ Nota>
+			< Nota>70</ Nota>
+			< Nota>87</ Nota>
+			< Nota>50</ Nota>
+			< Nota>99</ Nota>
+			< Nota>80</ Nota>
+			< Nota>0</ Nota>
+			< Nota>60</ Nota>
+			< Nota>61</ Nota>
+		</double>

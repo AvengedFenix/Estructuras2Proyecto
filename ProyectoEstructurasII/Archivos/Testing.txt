@@ -1,0 +1,2 @@
+Persona: char[30]:n, ID: int[6]:k, 
+Persona 1*********************|123456

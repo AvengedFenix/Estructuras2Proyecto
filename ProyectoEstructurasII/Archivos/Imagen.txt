@@ -1,0 +1,5 @@
+Tamano: int[5]:k, Fecha: char[10]:n, Resolucion: int[6]:n, Zoom: double[2]:n, 
+10***|hoy*******|1080**|2*
+20***|Ayer******|4K****|1*
+30***|20 Dias***|8K****|4*
+5****|1 mes*****|480***|1*

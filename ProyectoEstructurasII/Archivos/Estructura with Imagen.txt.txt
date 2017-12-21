@@ -1,0 +1,4 @@
+Clase: int[2]:k,  Nombre: char[20]:n, Tamano: int[5]:k,  Fecha: char[10]:n, 
+
+
+

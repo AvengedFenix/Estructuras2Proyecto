@@ -9,6 +9,7 @@ import Clases.XMLClass;
 import Clases.Archivos;
 import Clases.BTree;
 import Clases.Campos;
+import Clases.LinkedList;
 
 import java.io.BufferedWriter;
 
@@ -941,9 +942,13 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jb_index.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WhatsApp Image 2017-12-19 at 11.36.21 AM.jpeg"))); // NOI18N
+        jb_index.setFont(new java.awt.Font("Gotham Medium", 0, 11)); // NOI18N
+        jb_index.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ic_list_white_36dp_1x.png"))); // NOI18N
+        jb_index.setText("I N D E X");
         jb_index.setBorderPainted(false);
         jb_index.setContentAreaFilled(false);
+        jb_index.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jb_index.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jb_index.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_indexActionPerformed(evt);
@@ -972,7 +977,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(84, Short.MAX_VALUE)
+                        .addContainerGap(72, Short.MAX_VALUE)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1002,7 +1007,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                         .addComponent(jb_index)
                         .addGap(67, 67, 67)
                         .addComponent(bt_removereg)
@@ -2595,6 +2600,7 @@ public class GUI extends javax.swing.JFrame {
                     keyColumn = j;
                     if (!keys.contains(Integer.parseInt((String) model3.getValueAt(i, keyColumn)))) {
                         keys.add(Integer.parseInt((String) model3.getValueAt(i, keyColumn)));
+                        llaves.add(Integer.parseInt((String) model3.getValueAt(i, keyColumn)));
                     } else {
                         keyExists = true;
                     }
@@ -2629,6 +2635,7 @@ public class GUI extends javax.swing.JFrame {
                     archivo.insertar(Integer.toString(reg), sb.toString());
                     archivo.getLlaves().add(reg);
                     keys.add(reg);
+                    llaves.add(reg);
                     registrosAvailable.add(reg);
                     try {
                         int rrn = archivo.agregarRegistro(sb.toString());
@@ -3062,7 +3069,7 @@ public class GUI extends javax.swing.JFrame {
                         }
                         //--------------------------------------------------------------------------------------------
                         System.out.println(Arrays.toString(temp));
-                        //model7.addRow(temp);
+                        model7.addRow(temp);
                     }
                 }
             }
@@ -3070,7 +3077,7 @@ public class GUI extends javax.swing.JFrame {
         for (int i = 0; i < model7.getColumnCount(); i++) {
             System.out.println("Column: " + i + "> " + model7.getColumnName(i));
         }
-
+        jt_file3.setModel(model7);
         registro += "\n";
         System.out.println("Registros: " + registro);
         mergedFile.addRegistro(registro);
@@ -3143,6 +3150,9 @@ public class GUI extends javax.swing.JFrame {
 
     private void bt_backtomain6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_backtomain6ActionPerformed
         // TODO add your handling code here:
+        jd_mergedFile.dispose();
+        jd_mergedFile.setVisible(false);
+        jd_merge.setVisible(true);
     }//GEN-LAST:event_bt_backtomain6ActionPerformed
 
     private void jb_listar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_listar1ActionPerformed
@@ -3196,7 +3206,7 @@ public class GUI extends javax.swing.JFrame {
 
     public void eliminarReg(int reg) {
         int index = archivo.getLlaves().indexOf(reg);
-        archivo.getLlaves().remove(index);
+        archivo.getLlaves().remove((Object) reg);
         keys.remove((Object) reg);
         registrosAvailable.remove((Object) reg);
         archivo.eliminar(tf_search.getText(), registrosAvailable);
@@ -3415,6 +3425,7 @@ public class GUI extends javax.swing.JFrame {
     Campos tempCamp;
     ArrayList indexOffsets = new ArrayList();
     ArrayList keys = new ArrayList();
+    LinkedList llaves = new LinkedList();
     ArrayList registrosAvailable = new ArrayList();
     ArrayList registrosAvailable2 = new ArrayList();
     DefaultTableModel model = new DefaultTableModel();
@@ -3850,11 +3861,11 @@ public class GUI extends javax.swing.JFrame {
             RandomAccessFile raf = new RandomAccessFile("./Archivos/" + archivo.getName() + ".txt", "r");
             int tamanoArch = (int) raf.length();
             int cantReg = (tamanoArch - archivo.getHeaderSize()) / archivo.getTamanoReg();
-            System.out.println("cantidad Reg: " + cantReg);
+            // System.out.println("cantidad Reg: " + cantReg);
 
             for (int i = 1; i <= cantReg; i++) {
                 int offset = ((i - 1) * archivo.getTamanoReg()) + archivo.getHeaderSize();
-                System.out.println("oofset: " + offset);
+                //  System.out.println("oofset: " + offset);
                 raf.seek(offset);
                 String linea = raf.readLine();
 

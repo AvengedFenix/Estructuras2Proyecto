@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE XML>
+
+	<Key>
+		<int [5]> 
+			<Tamano>Text here</Tamano>
+		</int>
+	</Key>
+	<NoKey>
+		<char [10]> 
+			<Fecha>Text here</Fecha>
+		</char>
+	</NoKey>
+	<NoKey>
+		<int [6]> 
+			<Resolucion>Text here</Resolucion>
+		</int>
+	</NoKey>
+	<NoKey>
+		<double [2]> 
+			<Zoom>Text here</Zoom>
+		</double>
+	</NoKey>

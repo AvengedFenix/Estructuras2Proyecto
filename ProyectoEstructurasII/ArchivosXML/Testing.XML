@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE XML>
+
+	<NoKey>
+		<char [30]> 
+			<Persona>Text here</Persona>
+		</char>
+	</NoKey>
+	<Key>
+		<int [6]> 
+			<ID>Text here</ID>
+		</int>
+	</Key>
